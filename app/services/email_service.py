@@ -204,7 +204,7 @@ def _guest_table_confirmation_html(data: Dict[str, Any]) -> str:
 
     <p style="margin-top:18px; color:{MUTED_COLOR};">
         V primeru preprečitve nas prosimo obvestite vsaj 24 ur vnaprej.<br>
-        Kontakt: <strong>02 292 77 20</strong> ali <strong>info@zdravstveni-center.si</strong>
+        Kontakt: <strong>01 432 10 20</strong> ali <strong>info@zdravstveni-center.si</strong>
     </p>
     """
     return _email_wrapper(content)
