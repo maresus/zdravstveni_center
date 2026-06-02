@@ -2,978 +2,535 @@
 <html lang="sl">
 <head>
   <meta charset="UTF-8" />
-  <title>Zdravstveni center – Asistent</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Zdravstveni center – Digitalni pomočnik</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --primary: #0891b2;
-      --primary-dark: #0e7490;
-      --primary-light: #06b6d4;
-      --secondary: #059669;
-      --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 50%, #fef3c7 100%);
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --bg-card: #ffffff;
-      --shadow: 0 20px 60px rgba(8, 145, 178, 0.15);
-      --shadow-hover: 0 25px 70px rgba(8, 145, 178, 0.2);
-      --border: #e2e8f0;
-      --user-msg: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-      --bot-msg: #f8fafc;
-      --radius: 16px;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      font-size: 16px;
-      --app-vh: 100vh;
+      --primary: #1B6ECC;
+      --primary-dark: #2f6fad;
+      --primary-light: #e8f2fb;
+      --primary-lighter: #f0f7ff;
+      --text: #1a2638;
+      --muted: #5a7a9a;
+      --border: #cde0f2;
+      --bot-bg: #e8f2fb;
+      --white: #ffffff;
+      --success: #16a34a;
+      --danger: #dc2626;
     }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg-gradient);
-      background-attachment: fixed;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    html, body {
+      height: 100%; width: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--primary-lighter);
+      color: var(--text); overflow: hidden;
     }
-
-    .container {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .chat-card {
-      background: var(--bg-card);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      height: 90vh;
-      max-height: 800px;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .chat-card:hover {
-      box-shadow: var(--shadow-hover);
-    }
-
-    /* Header */
-    .chat-header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: white;
-      padding: 24px 28px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .header-left {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .header-icon {
-      width: 56px;
-      height: 56px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .header-info h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .header-info p {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-
-    .status-badge {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: #10b981;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .new-session-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: 600;
-      transition: all 0.2s;
-      backdrop-filter: blur(10px);
-    }
-
-    .new-session-btn:hover {
-      background: rgba(255, 255, 255, 0.25);
-      transform: translateY(-1px);
-    }
-
-    /* Messages Area */
-    .messages-container {
-      flex: 1;
-      overflow-y: auto;
-      padding: 24px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      background: linear-gradient(to bottom, #fafbfc 0%, #ffffff 100%);
-    }
-
-    .messages-container::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .messages-container::-webkit-scrollbar-track {
-      background: #f1f5f9;
-    }
-
-    .messages-container::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 4px;
-    }
-
-    .messages-container::-webkit-scrollbar-thumb:hover {
-      background: #94a3b8;
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 36px;
-      height: 36px;
-      background: #2d3e2f;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      z-index: 10;
-    }
-    .scroll-indicator.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .scroll-indicator svg {
-      width: 20px;
-      height: 20px;
-      fill: #fff;
-    }
-
-    /* Message Bubbles */
-    .message {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      animation: messageSlide 0.3s ease;
-    }
-
-    @keyframes messageSlide {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .message.user {
-      flex-direction: row-reverse;
-    }
-
-    .message-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .message.bot .message-avatar {
-      background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
-      color: white;
-    }
-
-    .message.user .message-avatar {
-      background: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
-      color: white;
-    }
-
-    .message-bubble {
-      max-width: 70%;
-      padding: 14px 18px;
-      border-radius: var(--radius);
-      line-height: 1.6;
-      font-size: 0.95rem;
-      word-wrap: break-word;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    .message.bot .message-bubble {
-      background: var(--bot-msg);
-      border: 1px solid var(--border);
-      border-bottom-left-radius: 4px;
-    }
-
-    .message.user .message-bubble {
-      background: var(--user-msg);
-      color: white;
-      border-bottom-right-radius: 4px;
-    }
-
-    .message-time {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 6px;
-      text-align: center;
-    }
-
-    .ui-actions {
-      margin-top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .ui-actions .ui-btn {
-      background: #e0f2fe;
-      border: 1px solid #bae6fd;
-      color: #0f172a;
-      padding: 8px 12px;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .ui-actions .ui-btn:hover {
-      background: #bae6fd;
-      transform: translateY(-1px);
-    }
-
-    .ui-date {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .ui-date input[type="date"] {
-      border: 1px solid var(--border);
-      padding: 8px 10px;
-      border-radius: 10px;
-      font-size: 0.85rem;
-    }
-
-    .ui-label {
-      width: 100%;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-
-    /* Typing Indicator */
-    .typing-indicator {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 18px;
-      background: var(--bot-msg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      border-bottom-left-radius: 4px;
-      max-width: fit-content;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    }
-
-    .typing-dots {
-      display: flex;
-      gap: 4px;
-    }
-
-    .typing-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: typing 1.4s infinite;
-    }
-
-    .typing-dot:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .typing-dot:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes typing {
-      0%, 60%, 100% {
-        transform: translateY(0);
-        opacity: 0.5;
-      }
-      30% {
-        transform: translateY(-10px);
-        opacity: 1;
-      }
-    }
-
-    /* Input Area */
-    .input-area {
-      padding: 20px 24px;
-      background: white;
-      border-top: 1px solid var(--border);
-    }
-
-    .quick-actions {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .quick-chip {
-      padding: 8px 16px;
-      background: #f8fafc;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .quick-chip:hover {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
-    }
-
-    .input-wrapper {
-      display: flex;
-      gap: 12px;
-      align-items: flex-end;
-    }
-
-    .input-field {
-      flex: 1;
-      background: #f8fafc;
-      border: 2px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 18px;
-      font-family: inherit;
-      font-size: 0.95rem;
-      resize: vertical;
-      min-height: 56px;
-      max-height: 200px;
-      transition: all 0.2s;
-      outline: none;
-    }
-
-    .input-field:focus {
-      background: white;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
-    }
-
-    .send-button {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-      color: white;
-      border: none;
-      border-radius: var(--radius);
-      padding: 16px 28px;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 4px 12px rgba(8, 145, 178, 0.25);
-    }
-
-    .send-button:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(8, 145, 178, 0.3);
-    }
-
-    .send-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .input-hint {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-      text-align: center;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      body {
-        align-items: stretch;
-        justify-content: flex-start;
-        overflow: hidden;
-      }
-
-      .container {
-        padding: 0;
-        min-height: var(--app-vh);
-      }
-
-      .chat-card {
-        border-radius: 0;
-        height: var(--app-vh);
-        max-height: var(--app-vh);
-        overflow: hidden;
-      }
-
-      .chat-header {
-        padding: calc(8px + env(safe-area-inset-top)) 14px 10px;
-        align-items: flex-start;
-        position: sticky;
-        top: 0;
-        z-index: 30;
-      }
-
-      .header-icon {
-        width: 38px;
-        height: 38px;
-        font-size: 19px;
-        border-radius: 10px;
-      }
-
-      .header-info h1 {
-        font-size: 1.02rem;
-        line-height: 1.15;
-      }
-
-      .header-info p {
-        font-size: 0.74rem;
-        line-height: 1.25;
-      }
-
-      .new-session-btn {
-        padding: 6px 10px;
-        font-size: 0.75rem;
-      }
-
-      .status-badge {
-        padding: 5px 9px;
-        font-size: 0.72rem;
-      }
-
-      .messages-container {
-        padding: 12px;
-        min-height: 0;
-        overflow-y: auto;
-        padding-bottom: 210px;
-      }
-
-      .message-bubble {
-        max-width: 85%;
-      }
-
-      .input-area {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 20;
-        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
-        box-shadow: 0 -8px 20px rgba(0, 0, 0, 0.08);
-        border-top: 1px solid var(--border);
-      }
-
-      .quick-actions {
-        display: none !important;
-      }
-
-      .quick-chip {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-        white-space: nowrap;
-      }
-
-      .input-wrapper {
-        gap: 8px;
-      }
-
-      .input-field {
-        min-height: 44px;
-        max-height: 96px;
-        padding: 10px 12px;
-      }
-
-      .send-button {
-        padding: 12px 14px;
-        font-size: 0.88rem;
-      }
-
-      .input-hint {
-        font-size: 0.72rem;
-        margin-top: 6px;
-        display: none;
-      }
-    }
-
-    /* Welcome Message Styling */
-    .welcome-message {
-      background: linear-gradient(135deg, #eff6ff 0%, #f0fdfa 100%);
-      border: 2px solid #bae6fd;
-      border-radius: var(--radius);
-      padding: 20px;
-      margin: 20px 0;
-    }
-
-    .welcome-message h3 {
-      color: var(--primary);
-      margin-bottom: 12px;
-      font-size: 1.1rem;
-    }
-
-    .welcome-message ul {
-      list-style: none;
-      margin-left: 0;
-      padding-left: 0;
-    }
-
-    .welcome-message li {
-      padding: 8px 0;
-      color: var(--text);
-      font-size: 0.95rem;
-    }
-
-    .welcome-message li:before {
-      content: " ";
-      color: var(--secondary);
-      font-weight: bold;
-      margin-right: 8px;
-    }
+    .container { display: flex; flex-direction: column; height: 100%; max-width: 860px; margin: 0 auto; background: var(--white); box-shadow: 0 0 40px rgba(67,139,209,0.12); }
+
+    /* HEADER */
+    .header { padding: 14px 20px; background: var(--primary); color: #fff; display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+    .header-logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; color: #fff; line-height: 1; }
+    .header-logo span { font-weight: 400; opacity: 0.85; }
+    .header-divider { width: 1px; height: 32px; background: rgba(255,255,255,0.3); }
+    .header-text h1 { font-size: 0.92rem; font-weight: 600; opacity: 0.95; }
+    .header-text p { font-size: 0.72rem; opacity: 0.75; margin-top: 1px; }
+    .header-status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 0.72rem; opacity: 0.85; }
+    .status-dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; }
+    .header-new-session { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 5px 10px; border-radius: 20px; font-size: 0.7rem; cursor: pointer; margin-left: 10px; }
+    .header-new-session:hover { background: rgba(255,255,255,0.28); }
+
+    /* MESSAGES */
+    .messages { flex: 1; overflow-y: auto; padding: 20px 16px; background: var(--white); display: flex; flex-direction: column; gap: 14px; }
+    .msg { max-width: 82%; padding: 11px 15px; border-radius: 18px; font-size: 0.9rem; line-height: 1.5; white-space: pre-wrap; word-wrap: break-word; }
+    .msg.user { margin-left: auto; background: var(--primary); color: #fff; border-bottom-right-radius: 4px; }
+    .msg.bot { margin-right: auto; background: var(--bot-bg); color: var(--text); border-bottom-left-radius: 4px; border: 1px solid var(--border); }
+    .msg.typing { background: var(--bot-bg); border: 1px solid var(--border); padding: 14px 18px; }
+    .typing-dots { display: flex; gap: 4px; }
+    .typing-dots span { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out; opacity: 0.6; }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { 0%,80%,100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+    .ui-actions { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .ui-btn { background: var(--white); border: 1.5px solid var(--primary); color: var(--primary); padding: 6px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+    .ui-btn:hover { background: var(--primary); color: #fff; }
+
+    /* QUICK BUTTONS */
+    .quick-btns { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 16px 8px; background: var(--primary-lighter); border-top: 1px solid var(--border); flex-shrink: 0; }
+    .quick-btn { padding: 7px 14px; border-radius: 20px; background: var(--white); border: 1.5px solid var(--border); color: var(--muted); font-size: 0.78rem; cursor: pointer; transition: all 0.15s; }
+    .quick-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-light); }
+
+    /* NAROČI SE */
+    .narocise-bar { padding: 10px 16px; background: var(--primary-lighter); border-top: 1px solid var(--border); flex-shrink: 0; }
+    .narocise-btn { width: 100%; padding: 13px 20px; background: var(--primary); color: #fff; border: none; border-radius: 12px; font-size: 0.92rem; font-weight: 700; cursor: pointer; transition: background 0.15s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .narocise-btn:hover { background: var(--primary-dark); }
+
+    /* INPUT */
+    .input-area { padding: 12px 16px; background: var(--white); border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0; }
+    .input-area textarea { flex: 1; min-height: 44px; max-height: 110px; padding: 11px 15px; border: 1.5px solid var(--border); border-radius: 22px; font-family: inherit; font-size: 0.9rem; resize: none; outline: none; line-height: 1.4; background: var(--primary-lighter); }
+    .input-area textarea:focus { border-color: var(--primary); background: var(--white); }
+    .send-btn { width: 44px; height: 44px; border-radius: 50%; border: none; background: var(--primary); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.15s; flex-shrink: 0; }
+    .send-btn:hover { background: var(--primary-dark); }
+    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .send-btn svg { width: 20px; height: 20px; fill: currentColor; }
+    .powered { padding: 6px; text-align: center; font-size: 0.65rem; color: #bbb; background: var(--white); }
+
+    /* BOOKING OVERLAY */
+    .booking-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(20,40,70,0.45); display: none; align-items: flex-end; justify-content: center; }
+    .booking-overlay.open { display: flex; }
+    .booking-sheet { background: var(--white); border-radius: 24px 24px 0 0; width: 100%; max-width: 860px; max-height: 92vh; overflow-y: auto; animation: slide-up 0.28s cubic-bezier(.32,.72,0,1); }
+    @keyframes slide-up { from { transform: translateY(60px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .sheet-topbar { position: sticky; top: 0; z-index: 10; background: var(--primary); padding: 14px 20px; display: flex; align-items: center; gap: 12px; border-radius: 24px 24px 0 0; }
+    .sheet-back { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 6px 12px; border-radius: 20px; font-size: 0.78rem; cursor: pointer; display: flex; align-items: center; gap: 4px; }
+    .sheet-back:hover { background: rgba(255,255,255,0.3); }
+    .sheet-title { color: #fff; font-size: 1rem; font-weight: 700; }
+    .sheet-body { padding: 20px 20px 28px; }
+
+    /* Type selector */
+    .type-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+    .type-card { border: 2px solid var(--border); border-radius: 14px; padding: 14px 12px; text-align: center; cursor: pointer; transition: all 0.15s; }
+    .type-card:hover { border-color: var(--primary); }
+    .type-card.selected { border-color: var(--primary); background: var(--primary-light); }
+    .type-card .type-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .type-card .type-name { font-size: 0.85rem; font-weight: 700; }
+    .type-card .type-desc { font-size: 0.72rem; color: var(--muted); margin-top: 3px; }
+
+    /* Napotnica info */
+    .napotnica-info { display: none; background: #fff8e1; border: 1.5px solid #f59e0b; border-radius: 14px; padding: 16px; margin-top: 4px; }
+    .napotnica-info h3 { font-size: 0.9rem; font-weight: 700; color: #92400e; margin-bottom: 10px; }
+    .napotnica-info p { font-size: 0.82rem; color: #78350f; line-height: 1.5; }
+    .napotnica-types { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .napotnica-type { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 10px; padding: 10px 12px; }
+    .napotnica-type strong { font-size: 0.82rem; color: #92400e; }
+    .napotnica-type span { font-size: 0.78rem; color: #78350f; display: block; margin-top: 2px; }
+
+    /* Booking form */
+    .booking-form { display: none; }
+    .booking-form.visible { display: block; }
+    .form-section { margin-bottom: 16px; }
+    .form-section-title { font-size: 0.75rem; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border); }
+    .form-field { margin-bottom: 12px; }
+    .form-field label { display: block; font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-bottom: 4px; }
+    .form-field input, .form-field select, .form-field textarea { width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 0.88rem; outline: none; background: var(--primary-lighter); transition: border-color 0.15s; }
+    .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--primary); background: var(--white); }
+    .form-field textarea { min-height: 70px; resize: none; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* MR vprašalnik */
+    .mr-questionnaire { display: none; }
+    .mr-questionnaire.visible { display: block; }
+    .mr-question { background: var(--primary-lighter); border: 1.5px solid var(--border); border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; }
+    .mr-question p { font-size: 0.83rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+    .q-options { display: flex; gap: 8px; }
+    .q-btn { flex: 1; padding: 8px; border-radius: 8px; border: 1.5px solid var(--border); background: var(--white); font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+    .q-btn.yes.selected { background: #fee2e2; border-color: var(--danger); color: var(--danger); }
+    .q-btn.no.selected { background: #dcfce7; border-color: var(--success); color: var(--success); }
+    .mr-block-warning { display: none; background: #fee2e2; border: 2px solid var(--danger); border-radius: 12px; padding: 14px; margin-top: 4px; font-size: 0.83rem; color: #7f1d1d; line-height: 1.5; }
+
+    .submit-btn { width: 100%; padding: 14px; background: var(--primary); color: #fff; border: none; border-radius: 12px; font-size: 0.95rem; font-weight: 700; cursor: pointer; margin-top: 8px; transition: background 0.15s; }
+    .submit-btn:hover { background: var(--primary-dark); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .form-success { display: none; text-align: center; padding: 30px 16px; }
+    .form-success .s-icon { font-size: 3rem; margin-bottom: 12px; }
+    .form-success h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--success); }
+    .form-success p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="chat-card">
-      <!-- Header -->
-      <div class="chat-header">
-        <div class="header-left">
-          <div class="header-icon"></div>
-          <div class="header-info">
-            <h1>Zdravstveni center</h1>
-            <p>Asistent za naročanje pregledov</p>
+<div class="container">
+  <div class="header">
+    <div class="header-logo">ZC<span> Asistent</span></div>
+    <div class="header-divider"></div>
+    <div class="header-text">
+      <h1>Digitalni pomočnik</h1>
+      <p>Medicinska diagnostika in terapija · Maribor</p>
+    </div>
+    <div class="header-status"><div class="status-dot"></div>Na voljo</div>
+    <button class="header-new-session" id="newSessionBtn">Nova seja</button>
+  </div>
+
+  <div class="messages" id="messages"></div>
+
+  <div class="quick-btns" id="quickBtns">
+    <button class="quick-btn" data-msg="Kako se naročim na MR preiskavo?">Naročanje MR</button>
+    <button class="quick-btn" data-msg="Katere preiskave so samoplačniške?">Samoplačniške storitve</button>
+    <button class="quick-btn" data-msg="Kakšna je razlika med napotnico in samoplačniškim?">Napotnica ali samoplačniško?</button>
+    <button class="quick-btn" data-msg="Kje se nahajate in kakšen je delovni čas?">Kontakt in lokacija</button>
+    <button class="quick-btn" data-msg="Kako se pripravim na MR preiskavo?">Priprava na MR</button>
+    <button class="quick-btn" data-msg="Imate cenik storitev?">Cenik</button>
+  </div>
+
+  <div class="narocise-bar">
+    <button class="narocise-btn" id="narociseBtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+      Naroči se na preiskavo
+    </button>
+  </div>
+
+  <div class="input-area">
+    <textarea id="input" placeholder="Vprašajte o preiskavah, naročanju, pripravi…" rows="1"></textarea>
+    <button class="send-btn" id="sendBtn" aria-label="Pošlji">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+  <div class="powered">Zdravstveni center d.o.o. · Cankarjeva ulica 15, Ljubljana · 01 432 10 20</div>
+</div>
+
+<!-- BOOKING OVERLAY -->
+<div class="booking-overlay" id="bookingOverlay">
+  <div class="booking-sheet">
+    <div class="sheet-topbar">
+      <button class="sheet-back" id="closeSheet">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Nazaj na pogovor
+      </button>
+      <span class="sheet-title">Naroči se na preiskavo</span>
+    </div>
+    <div class="sheet-body">
+      <div id="step1">
+        <p style="font-size:0.82rem;color:var(--muted);margin-bottom:14px;">Izberite vrsto naročanja:</p>
+        <div class="type-selector">
+          <div class="type-card" id="typesamoplacniski" onclick="selectType('samoplacniski')">
+            <div class="type-icon">💳</div>
+            <div class="type-name">Samoplačniško</div>
+            <div class="type-desc">Hitro, brez čakalne dobe</div>
+          </div>
+          <div class="type-card" id="typenapotnica" onclick="selectType('napotnica')">
+            <div class="type-icon">📋</div>
+            <div class="type-name">Na napotnico</div>
+            <div class="type-desc">Prek eZdravja</div>
           </div>
         </div>
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <button class="new-session-btn" id="newSessionBtn"> Nova seja</button>
-          <div class="status-badge">
-            <div class="status-dot"></div>
-            <span>Na voljo</span>
+        <div class="napotnica-info" id="napotnicaInfo">
+          <h3>ℹ️ Naročanje na napotnico</h3>
+          <p>Naročanje na napotnico poteka izključno prek sistema <strong>eZdravje</strong>. Napotnico vam izda vaš lečeči zdravnik in jo vnese v sistem — nato vas kontaktiramo sami.</p>
+          <div class="napotnica-types">
+            <div class="napotnica-type"><strong>Redna napotnica</strong><span>Čakalna doba 6 mesecev ali več (za MR).</span></div>
+            <div class="napotnica-type"><strong>Hitra napotnica</strong><span>Krajša čakalna doba — zahteva klinično utemeljitev lečečega zdravnika.</span></div>
+            <div class="napotnica-type"><strong>Zelo hitra napotnica</strong><span>Najkrajša čakalna doba — za urgentne klinične primere.</span></div>
           </div>
+          <p style="margin-top:12px;font-size:0.78rem;">Za vprašanja pokličite <strong>01 432 10 20</strong>.</p>
         </div>
       </div>
 
-      <!-- Messages -->
-      <div class="messages-wrapper" style="position:relative;flex:1;display:flex;flex-direction:column;min-height:0;">
-        <div class="messages-container" id="messagesContainer">
-          <!-- Messages will be added here -->
+      <div class="booking-form" id="bookingForm">
+        <div class="form-section">
+          <div class="form-section-title">Vrsta preiskave</div>
+          <div class="form-field">
+            <label>Storitev *</label>
+            <select id="bf-service" onchange="onServiceChange()">
+              <option value="">— Izberite preiskavo —</option>
+              <optgroup label="Magnetnoresonančna tomografija (MR)">
+                <option value="MR glave in vratu">MR glave in vratu</option>
+                <option value="MR hrbtenice">MR hrbtenice</option>
+                <option value="MR sklepov in okončin">MR sklepov in okončin</option>
+                <option value="MR artrografija">MR artrografija</option>
+                <option value="MR zgornjega abdomna">MR zgornjega abdomna</option>
+                <option value="MR enterografija">MR enterografija</option>
+                <option value="MR urografija">MR urografija</option>
+                <option value="MR male medenice">MR male medenice</option>
+                <option value="MR prostate">MR prostate</option>
+                <option value="MR dojk">MR dojk</option>
+                <option value="MR prsnega koša">MR prsnega koša</option>
+                <option value="MR angiografija">MR angiografija (MRA)</option>
+              </optgroup>
+              <optgroup label="Rentgensko slikanje (RTG)">
+                <option value="RTG slikanje">RTG slikanje</option>
+              </optgroup>
+              <optgroup label="Ultrazvočna diagnostika (UZ) – samo samoplačniško">
+                <option value="UZ diagnostika">UZ diagnostika</option>
+                <option value="UZ vodeno izpiranje kalcifikacij">UZ vodeno izpiranje kalcifikacij</option>
+                <option value="UZ vodena aplikacija kortikosteroida">UZ vodena aplikacija kortikosteroida (blokada)</option>
+                <option value="UZ vodena izpraznitev ganglionske ciste">UZ vodena izpraznitev ganglionske ciste</option>
+              </optgroup>
+            </select>
+          </div>
         </div>
-        <div id="scrollIndicator" class="scroll-indicator">
-          <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></svg>
+
+        <div class="mr-questionnaire" id="mrQuestionnaire">
+          <div class="form-section">
+            <div class="form-section-title">⚠️ Varnostni vprašalnik za MR</div>
+            <div class="mr-question">
+              <p>1. Ali imate vgrajen srčni spodbujevalnik ali defibrilator?</p>
+              <div class="q-options">
+                <button class="q-btn yes" onclick="answerQ('spodbujevalnik','da')">Da</button>
+                <button class="q-btn no" onclick="answerQ('spodbujevalnik','ne')">Ne</button>
+              </div>
+            </div>
+            <div class="mr-block-warning" id="warn-spodbujevalnik">
+              ⛔ Žal pri osebah s srčnim spodbujevalnikom ali defibrilatorjem MR preiskav iz varnostnih razlogov ne opravljamo. Za alternativne možnosti se posvetujte z vašim zdravnikom ali nas pokličite na <strong>01 432 10 20</strong>.
+            </div>
+            <div class="mr-question">
+              <p>2. Ste kdaj imeli alergijsko reakcijo na kontrastno sredstvo?</p>
+              <div class="q-options">
+                <button class="q-btn yes" onclick="answerQ('alergija','da')">Da</button>
+                <button class="q-btn no" onclick="answerQ('alergija','ne')">Ne</button>
+              </div>
+            </div>
+            <div class="mr-question">
+              <p>3. Imate strah pred zaprtim prostorom (klavstrofobija)?</p>
+              <div class="q-options">
+                <button class="q-btn yes" onclick="answerQ('klavstrofobija','da')">Da</button>
+                <button class="q-btn no" onclick="answerQ('klavstrofobija','ne')">Ne</button>
+              </div>
+            </div>
+            <div class="mr-question">
+              <p>4. Imate kovinske vsadke, endoprotezo, vijake ali drug vsajen material?</p>
+              <div class="q-options">
+                <button class="q-btn yes" onclick="answerQ('vsadki','da')">Da</button>
+                <button class="q-btn no" onclick="answerQ('vsadki','ne')">Ne</button>
+              </div>
+            </div>
+            <div class="mr-question">
+              <p>5. Ali ste noseči ali je nosečnost možna?</p>
+              <div class="q-options">
+                <button class="q-btn yes" onclick="answerQ('nosecnost','da')">Da</button>
+                <button class="q-btn no" onclick="answerQ('nosecnost','ne')">Ne</button>
+              </div>
+            </div>
+            <p style="font-size:0.75rem;color:var(--muted);margin-top:4px;">Vaše odgovore posredujemo Zdravstveni center ekipi pred preiskavo.</p>
+          </div>
         </div>
+
+        <div class="form-section">
+          <div class="form-section-title">Vaši podatki</div>
+          <div class="form-row">
+            <div class="form-field"><label>Ime in priimek *</label><input type="text" id="bf-name" placeholder="Ana Novak" /></div>
+            <div class="form-field"><label>Telefon *</label><input type="tel" id="bf-phone" placeholder="041 123 456" /></div>
+          </div>
+          <div class="form-field"><label>E-pošta * <span style="font-weight:400">(za potrditev)</span></label><input type="email" id="bf-email" placeholder="ana.novak@email.com" /></div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-title">Željeni termin</div>
+          <div class="form-row">
+            <div class="form-field"><label>Datum</label><input type="date" id="bf-date" /></div>
+            <div class="form-field"><label>Ura (08:00–20:00)</label><input type="time" id="bf-time" min="08:00" max="20:00" step="1800" /></div>
+          </div>
+          <div class="form-field"><label>Opomba</label><textarea id="bf-note" placeholder="Dodatne informacije…"></textarea></div>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" onclick="submitBooking()">Pošlji naročilo →</button>
       </div>
 
-      <!-- Input Area -->
-      <div class="input-area">
-        <div class="quick-actions">
-          <div class="quick-chip" data-prompt="Kako poteka naročanje na pregled?"> Naročanje</div>
-          <div class="quick-chip" data-prompt="Katere preglede in posege izvajate?"> Pregledi</div>
-          <div class="quick-chip" data-prompt="Imate cenik storitev?"> Cenik</div>
-          <div class="quick-chip" data-prompt="Kje se nahajate in kako do vas?"> Lokacija</div>
-          <div class="quick-chip" data-prompt="Rad bi naročil termin za dermatološki pregled."> Naroči termin</div>
-        </div>
-        <div class="input-wrapper">
-          <textarea
-            class="input-field"
-            id="messageInput"
-            placeholder="Vnesite sporočilo..."></textarea>
-          <button class="send-button" id="sendButton">
-            <span>Pošlji</span>
-            <span>→</span>
-          </button>
-        </div>
-        <div class="input-hint">Enter = pošlji • Shift+Enter = nova vrstica</div>
+      <div class="form-success" id="formSuccess">
+        <div class="s-icon">✅</div>
+        <h3>Naročilo prejeto!</h3>
+        <p>Hvala za naročilo. Ekipa Zdravstveni center vas bo kontaktirala za potrditev termina.<br><br>Potrditveni email z navodili za pripravo preiskave boste prejeli na vaš email naslov.</p>
+        <p style="margin-top:16px;font-size:0.78rem;color:var(--muted);">Vprašanja? Pokličite: <strong>01 432 10 20</strong></p>
       </div>
     </div>
   </div>
+</div>
 
-  <script>
-    function setAppVh() {
-      const vh = (window.visualViewport && window.visualViewport.height)
-        ? window.visualViewport.height
-        : window.innerHeight;
-      document.documentElement.style.setProperty('--app-vh', `${Math.round(vh)}px`);
+<script>
+  const STORAGE_KEY = 'zc_chat_history';
+  const SESSION_KEY = 'zc_session_id';
+  const messagesEl = document.getElementById('messages');
+  const inputEl = document.getElementById('input');
+  const sendBtn = document.getElementById('sendBtn');
+  const quickBtns = document.getElementById('quickBtns');
+
+  let sessionId = localStorage.getItem(SESSION_KEY);
+  if (!sessionId) {
+    sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
+    localStorage.setItem(SESSION_KEY, sessionId);
+  }
+
+  const mrAnswers = {};
+  let mrBlocked = false;
+
+  function answerQ(qId, answer) {
+    mrAnswers[qId] = answer;
+    document.querySelectorAll(`[onclick*="'${qId}'"]`).forEach(btn => btn.classList.remove('selected'));
+    const selector = answer === 'da' ? `[onclick="answerQ('${qId}','da')"]` : `[onclick="answerQ('${qId}','ne')"]`;
+    document.querySelector(selector)?.classList.add('selected');
+    if (qId === 'spodbujevalnik') {
+      const warn = document.getElementById('warn-spodbujevalnik');
+      if (answer === 'da') { warn.style.display = 'block'; mrBlocked = true; document.getElementById('submitBtn').disabled = true; }
+      else { warn.style.display = 'none'; mrBlocked = false; document.getElementById('submitBtn').disabled = false; }
     }
-    setAppVh();
-    window.addEventListener('resize', setAppVh);
-    if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', setAppVh);
-    }
+  }
 
-    // Configuration
-    const apiUrl = "/chat/";
-    const sessionKey = "chat_session_id";
+  function isMR(val) { return val && val.startsWith('MR'); }
 
-    // Session Management
-    let sessionId = localStorage.getItem(sessionKey);
-    if (!sessionId) {
-      sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
-      localStorage.setItem(sessionKey, sessionId);
-    }
+  function onServiceChange() {
+    const val = document.getElementById('bf-service').value;
+    const mrQ = document.getElementById('mrQuestionnaire');
+    if (isMR(val)) { mrQ.classList.add('visible'); }
+    else { mrQ.classList.remove('visible'); mrBlocked = false; document.getElementById('submitBtn').disabled = false; }
+  }
 
-    // DOM Elements
-    const messagesContainer = document.getElementById('messagesContainer');
-    const messageInput = document.getElementById('messageInput');
-    const sendButton = document.getElementById('sendButton');
-    const newSessionBtn = document.getElementById('newSessionBtn');
-    const scrollIndicator = document.getElementById('scrollIndicator');
+  let selectedType = null;
+  function selectType(type) {
+    selectedType = type;
+    document.getElementById('typesamoplacniski').classList.toggle('selected', type === 'samoplacniski');
+    document.getElementById('typenapotnica').classList.toggle('selected', type === 'napotnica');
+    document.getElementById('napotnicaInfo').style.display = type === 'napotnica' ? 'block' : 'none';
+    const form = document.getElementById('bookingForm');
+    if (type === 'samoplacniski') {
+      form.classList.add('visible');
+      document.getElementById('bf-date').min = new Date().toISOString().split('T')[0];
+    } else { form.classList.remove('visible'); }
+    document.getElementById('formSuccess').style.display = 'none';
+  }
 
-    // Scroll indicator logic
-    function updateScrollIndicator() {
-      const threshold = 50;
-      const isNearBottom = messagesContainer.scrollHeight - messagesContainer.scrollTop - messagesContainer.clientHeight < threshold;
-      scrollIndicator.classList.toggle("visible", !isNearBottom);
-    }
-    messagesContainer.addEventListener("scroll", updateScrollIndicator);
-    scrollIndicator.addEventListener("click", () => {
-      messagesContainer.scrollTo({ top: messagesContainer.scrollHeight, behavior: "smooth" });
+  async function submitBooking() {
+    if (mrBlocked) return;
+    const name = document.getElementById('bf-name').value.trim();
+    const phone = document.getElementById('bf-phone').value.trim();
+    const email = document.getElementById('bf-email').value.trim();
+    const service = document.getElementById('bf-service').value;
+    if (!name || !phone || !service) { alert('Prosimo izpolnite ime, telefon in vrsto preiskave.'); return; }
+    if (!email) { alert('E-pošta je obvezna za potrditev termina.'); return; }
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true; btn.textContent = 'Pošiljam…';
+    const payload = {
+      session_id: sessionId, clinic_id: 'lj_center',
+      booking_form: {
+        name, phone, email, service,
+        date: document.getElementById('bf-date').value,
+        time: document.getElementById('bf-time').value,
+        note: document.getElementById('bf-note').value.trim(),
+        mr_questionnaire: isMR(service) ? {...mrAnswers} : null,
+        booking_type: 'samoplacniski',
+      }
+    };
+    try {
+      await fetch('/reservations/', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    } catch(e) { console.error(e); }
+    document.getElementById('bookingForm').classList.remove('visible');
+    document.getElementById('step1').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+    const mrNote = isMR(service) && Object.keys(mrAnswers).length ? '\nMR vprašalnik izpolnjen.' : '';
+    addMessageToDOM(`Naročilo oddano: ${service}\n${name} · ${phone} · ${email}${mrNote}`, 'user');
+    addMessageToDOM('Hvala za naročilo! Ekipa Zdravstveni center vas bo kontaktirala za potrditev termina.\n\nPotrditveni email z navodili za pripravo preiskave boste prejeli na vaš email naslov.', 'bot');
+    setTimeout(() => { closeSheet(); resetBookingForm(); }, 4000);
+  }
+
+  function resetBookingForm() {
+    selectedType = null;
+    Object.keys(mrAnswers).forEach(k => delete mrAnswers[k]);
+    mrBlocked = false;
+    ['typesamoplacniski','typenapotnica'].forEach(id => document.getElementById(id).classList.remove('selected'));
+    document.getElementById('napotnicaInfo').style.display = 'none';
+    document.getElementById('bookingForm').classList.remove('visible');
+    document.getElementById('mrQuestionnaire').classList.remove('visible');
+    document.getElementById('formSuccess').style.display = 'none';
+    document.getElementById('step1').style.display = 'block';
+    document.getElementById('submitBtn').disabled = false;
+    document.getElementById('submitBtn').textContent = 'Pošlji naročilo →';
+    document.getElementById('warn-spodbujevalnik').style.display = 'none';
+    ['bf-name','bf-phone','bf-email','bf-date','bf-time','bf-note'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('bf-service').selectedIndex = 0;
+    document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('selected'));
+  }
+
+  const overlay = document.getElementById('bookingOverlay');
+  document.getElementById('narociseBtn').addEventListener('click', () => overlay.classList.add('open'));
+  document.getElementById('closeSheet').addEventListener('click', closeSheet);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeSheet(); });
+  function closeSheet() { overlay.classList.remove('open'); }
+
+  function scrollToBottom() { messagesEl.scrollTop = messagesEl.scrollHeight; }
+
+  function addMessageToDOM(text, who, save = true, metadata = null) {
+    const div = document.createElement('div');
+    div.className = 'msg ' + who;
+    div.textContent = text;
+    messagesEl.appendChild(div);
+    scrollToBottom();
+    if (who === 'bot' && metadata?.ui) renderUiActions(div, metadata.ui);
+    if (save) saveHistory();
+    return div;
+  }
+
+  function showTyping() {
+    const div = document.createElement('div');
+    div.className = 'msg bot typing'; div.id = 'typing';
+    div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+    messagesEl.appendChild(div); scrollToBottom();
+  }
+  function hideTyping() { document.getElementById('typing')?.remove(); }
+
+  function renderUiActions(container, ui) {
+    const actions = document.createElement('div');
+    actions.className = 'ui-actions';
+    let items = null;
+    if (ui.type === 'time_slots') items = (ui.slots || []).map(s => ({label:s, value:s}));
+    else if (ui.type === 'confirm') items = (ui.options || []).map(o => ({label:o, value:o}));
+    else if (ui.type === 'service_select') items = (ui.options || []).map(o => ({label:o.label||o.value, value:o.value||o.label}));
+    if (items) items.forEach(item => {
+      const btn = document.createElement('button');
+      btn.className = 'ui-btn'; btn.textContent = item.label;
+      btn.addEventListener('click', () => sendMessage(item.value));
+      actions.appendChild(btn);
     });
+    if (actions.children.length) container.appendChild(actions);
+  }
 
-    messageInput.addEventListener('focus', () => {
-      setTimeout(() => {
-        messageInput.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-      }, 120);
-    });
-
-    // Timeout Management (1 hour)
-    const ONE_HOUR = 3600 * 1000;
-
-    function checkChatTimeout() {
-      const lastActivity = localStorage.getItem("last_chat_activity");
-      const now = Date.now();
-      if (lastActivity && now - Number(lastActivity) > ONE_HOUR) {
-        localStorage.removeItem("chat_history");
-        localStorage.removeItem(sessionKey);
-        localStorage.removeItem("last_chat_activity");
-        sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
-        localStorage.setItem(sessionKey, sessionId);
-      }
-    }
-    checkChatTimeout();
-
-    // Format message text (basic markdown support)
-    function formatMessage(text) {
-      // Convert newlines to <br>
-      text = text.replace(/\n/g, '<br>');
-      // Bold **text**
-      text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      // Italic *text*
-      text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      return text;
-    }
-
-    let lastUserMsg = null;
-
-    // Add message to chat
-    function addMessage(text, type = 'bot', metadata = null) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${type}`;
-
-      const avatar = document.createElement('div');
-      avatar.className = 'message-avatar';
-      avatar.textContent = type === 'bot' ? '' : '';
-
-      const bubble = document.createElement('div');
-      bubble.className = 'message-bubble';
-      bubble.innerHTML = formatMessage(text);
-
-      messageDiv.appendChild(avatar);
-      messageDiv.appendChild(bubble);
-
-      messagesContainer.appendChild(messageDiv);
-
-      if (type === 'user') {
-        lastUserMsg = messageDiv;
-        // Scroll user message to TOP of messages area
-        messagesContainer.scrollTop = messageDiv.offsetTop;
-      } else if (lastUserMsg) {
-        // Keep user message at top when bot responds
-        messagesContainer.scrollTop = lastUserMsg.offsetTop;
-      }
-      updateScrollIndicator();
-
-      localStorage.setItem("last_chat_activity", Date.now().toString());
-
-      if (type === 'bot' && metadata?.ui) {
-        renderUiActions(bubble, metadata.ui);
-      }
-    }
-
-    // Show typing indicator
-    function showTypingIndicator() {
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'message bot';
-      typingDiv.id = 'typing-indicator';
-
-      const avatar = document.createElement('div');
-      avatar.className = 'message-avatar';
-      avatar.textContent = '';
-
-      const indicator = document.createElement('div');
-      indicator.className = 'typing-indicator';
-      indicator.innerHTML = `
-        <div class="typing-dots">
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-          <div class="typing-dot"></div>
-        </div>
-      `;
-
-      typingDiv.appendChild(avatar);
-      typingDiv.appendChild(indicator);
-      messagesContainer.appendChild(typingDiv);
-      // Don't scroll - user message stays visible at top
-    }
-
-    // Hide typing indicator
-    function hideTypingIndicator() {
-      const indicator = document.getElementById('typing-indicator');
-      if (indicator) {
-        indicator.remove();
-      }
-    }
-
-    // Send message
-    function normalizeChatResponse(data) {
-      const displayText = data?.display_text ?? data?.text ?? data?.reply ?? '';
-      const metadata = data?.metadata ?? {};
-      const actionSuggestion = data?.action_suggestion ?? metadata?.action_suggestion ?? null;
-
-      let finalText = displayText || 'Ni odgovora.';
-      if (actionSuggestion) {
-        finalText += `\n\n ${actionSuggestion}`;
-      }
-
-      return { text: finalText, metadata };
-    }
-
-    function formatDateToDotted(isoDate) {
-      const [year, month, day] = isoDate.split('-');
-      return `${day}.${month}.${year}`;
-    }
-
-    function renderUiActions(bubbleEl, ui) {
-      const actions = document.createElement('div');
-      actions.className = 'ui-actions';
-
-      if (ui?.label) {
-        const label = document.createElement('div');
-        label.className = 'ui-label';
-        label.textContent = ui.label;
-        actions.appendChild(label);
-      }
-
-      if (ui?.type === 'date_picker') {
-        const wrap = document.createElement('div');
-        wrap.className = 'ui-date';
-
-        const input = document.createElement('input');
-        input.type = 'date';
-        if (ui.min_date) input.min = ui.min_date;
-
-        const btn = document.createElement('button');
-        btn.className = 'ui-btn';
-        btn.textContent = 'Potrdi datum';
-        btn.addEventListener('click', () => {
-          if (!input.value) return;
-          const formatted = formatDateToDotted(input.value);
-          sendMessageWithText(formatted);
-        });
-
-        wrap.appendChild(input);
-        wrap.appendChild(btn);
-        actions.appendChild(wrap);
-      } else if (ui?.type === 'time_slots' && Array.isArray(ui.slots)) {
-        ui.slots.forEach(slot => {
-          const btn = document.createElement('button');
-          btn.className = 'ui-btn';
-          btn.textContent = slot;
-          btn.addEventListener('click', () => sendMessageWithText(slot));
-          actions.appendChild(btn);
-        });
-      } else if (ui?.type === 'confirm' && Array.isArray(ui.options)) {
-        ui.options.forEach(option => {
-          const btn = document.createElement('button');
-          btn.className = 'ui-btn';
-          btn.textContent = option;
-          btn.addEventListener('click', () => sendMessageWithText(option));
-          actions.appendChild(btn);
-        });
-      } else if (ui?.type === 'service_select' && Array.isArray(ui.options)) {
-        ui.options.forEach(option => {
-          const btn = document.createElement('button');
-          btn.className = 'ui-btn';
-          btn.textContent = option.label || option.value;
-          btn.addEventListener('click', () => sendMessageWithText(option.value || option.label));
-          actions.appendChild(btn);
-        });
-      }
-
-      if (actions.children.length > 0) {
-        bubbleEl.appendChild(actions);
-      }
-    }
-
-    async function sendMessageWithText(text) {
-      const trimmed = text.trim();
-      if (!trimmed) return;
-
-      addMessage(trimmed, 'user');
-      messageInput.value = '';
-      messageInput.focus();
-
-      sendButton.disabled = true;
-      showTypingIndicator();
-
-      try {
-        const response = await fetch(apiUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            message: trimmed,
-            session_id: sessionId
-          })
-        });
-
-        hideTypingIndicator();
-
-        if (!response.ok) {
-          addMessage('Oprostite, prišlo je do napake pri povezavi. Poskusite znova.', 'bot');
-        } else {
-          const data = await response.json();
-          const normalized = normalizeChatResponse(data);
-          addMessage(normalized.text, 'bot', normalized.metadata);
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        hideTypingIndicator();
-        addMessage('Prišlo je do napake pri povezavi s strežnikom. Preverite internetno povezavo.', 'bot');
-      } finally {
-        sendButton.disabled = false;
-      }
-    }
-
-    async function sendMessage() {
-      const text = messageInput.value.trim();
-      if (!text) return;
-
-      sendMessageWithText(text);
-    }
-
-    // Show welcome message
-    function showWelcome() {
-      messagesContainer.innerHTML = '';
-      addMessage('Pozdravljeni! Kako vam lahko pomagam?', 'bot');
-    }
-
-    // Event Listeners
-    sendButton.addEventListener('click', sendMessage);
-
-    messageInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-
-    // Quick action chips
-    document.querySelectorAll('.quick-chip').forEach(chip => {
-      chip.addEventListener('click', () => {
-        const prompt = chip.getAttribute('data-prompt');
-        messageInput.value = prompt;
-        messageInput.focus();
+  async function sendMessage(text) {
+    if (!text.trim()) return;
+    addMessageToDOM(text, 'user');
+    inputEl.value = ''; inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+    quickBtns.style.display = 'none';
+    showTyping();
+    try {
+      const res = await fetch('/chat/', {
+        method: 'POST', headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ message: text, session_id: sessionId, clinic_id: 'lj_center' })
       });
-    });
+      hideTyping();
+      if (res.ok) {
+        const data = await res.json();
+        const txt = data?.display_text ?? data?.text ?? data?.reply ?? 'Oprostite, prišlo je do napake.';
+        const action = data?.action_suggestion ?? data?.metadata?.action_suggestion;
+        addMessageToDOM(action ? `${txt}\n\n💡 ${action}` : txt, 'bot', true, data?.metadata ?? null);
+      } else {
+        addMessageToDOM('Oprostite, strežnik trenutno ni dosegljiv. Pokličite nas: 01 432 10 20', 'bot');
+      }
+    } catch(e) {
+      hideTyping();
+      addMessageToDOM('Oprostite, prišlo je do napake pri povezavi.', 'bot');
+    }
+    sendBtn.disabled = false;
+    inputEl.focus();
+  }
 
-    // New session button
-    newSessionBtn.addEventListener('click', () => {
-      localStorage.removeItem(sessionKey);
-      sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
-      localStorage.setItem(sessionKey, sessionId);
-      localStorage.setItem("last_chat_activity", Date.now().toString());
-      showWelcome();
-    });
+  function saveHistory() {
+    try {
+      const msgs = [...document.querySelectorAll('.msg:not(.typing)')].map(el => ({text: el.textContent, who: el.classList.contains('user') ? 'user' : 'bot'}));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs.slice(-60)));
+    } catch(e) {}
+  }
 
-    // Initialize
-    showWelcome();
-  </script>
+  function loadHistory() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const msgs = JSON.parse(saved);
+        if (msgs.length > 0) { msgs.forEach(m => addMessageToDOM(m.text, m.who, false)); quickBtns.style.display = 'none'; return true; }
+      }
+    } catch(e) {}
+    return false;
+  }
+
+  document.getElementById('newSessionBtn').addEventListener('click', () => {
+    localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(SESSION_KEY);
+    sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
+    localStorage.setItem(SESSION_KEY, sessionId);
+    messagesEl.innerHTML = ''; quickBtns.style.display = 'flex';
+    addMessageToDOM('Pozdravljeni pri Zdravstveni center!\n\nSem vaš digitalni pomočnik. Pomagam vam z informacijami o preiskavah ter naročanjem na samoplačniške storitve.\n\nKako vam lahko pomagam?', 'bot', false);
+  });
+
+  sendBtn.addEventListener('click', () => sendMessage(inputEl.value));
+  inputEl.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(inputEl.value); } });
+  inputEl.addEventListener('input', () => { inputEl.style.height = 'auto'; inputEl.style.height = Math.min(inputEl.scrollHeight, 110) + 'px'; });
+  document.querySelectorAll('.quick-btn').forEach(btn => btn.addEventListener('click', () => sendMessage(btn.dataset.msg)));
+
+  if (!loadHistory()) {
+    addMessageToDOM('Pozdravljeni pri Zdravstveni center!\n\nSem vaš digitalni pomočnik. Pomagam vam z informacijami o preiskavah ter naročanjem na samoplačniške storitve.\n\nKako vam lahko pomagam?', 'bot', false);
+  }
+</script>
 </body>
 </html>
