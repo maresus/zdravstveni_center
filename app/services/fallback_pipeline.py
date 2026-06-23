@@ -161,6 +161,11 @@ def handle_loop_guard(
     return ChatResponse(reply=payload["text"], session_id=raw_session_id, metadata=payload["metadata"])
 
 
+_GREETING_KW = {
+    "zdravo", "zdravjo", "zdwavo", "živjo", "zivjo", "pozdravljeni",
+    "dober dan", "dobro jutro", "hello", "hej", "halo",
+}
+
 def resolve_response_fallback(
     *,
     message: str,
@@ -169,6 +174,10 @@ def resolve_response_fallback(
     conversation_history: list[dict[str, str]],
     deps: Any,
 ) -> str:
+    lowered = message.lower().strip()
+    if any(kw in lowered for kw in _GREETING_KW):
+        return deps.get_response("general.greeting", clinic_id=clinic_id)
+
     cached_response = deps.response_cache.get(message)
     if cached_response:
         return cached_response
