@@ -1,166 +1,151 @@
 clinic_id: "lj_center"
 contact:
-  name: "Zdravstveni center Novak"
-  email: "info@zc-novak.si"
-  phone: "01 432 10 20"
-  address: "Cankarjeva ulica 15, 1000 Ljubljana"
-  director: "dr. Matjaž Novak, dr. med."
-  parking: "Brezplačno parkirišče pred objektom"
-  hours: "Pon–Pet: 08:00–18:00 | Sob: 09:00–13:00"
+  name: "Medilab d.o.o."
+  email: "mr@medilab.si"
+  phone: "04 271 30 10"
+  phone_scitnica: "04 271 30 15"
+  email_scitnica: "scitnica@medilab.si"
+  address: "Partizanska cesta 12, 4000 Kranj"
+  director: "dr. Maja Kokalj, dr. med., spec. radiolog"
+  parking: "Brezplačno parkirišče neposredno ob objektu (30 mest)"
+  hours: "Vsak dan: 07:00–19:00"
 services:
-  dermatolog:
-    name: "Dermatološki pregled"
-    price_range: "25-150 €"
+  mr:
+    name: "MR preiskava"
+    price_range: "po napotnici ZZZS ali samoplačniško"
     duration_minutes: 30
-    description: "Pregledi kožnih bolezni, laserski in estetski posegi"
-  ortoped:
-    name: "Ortopedski pregled"
-    price_range: "40-80 €"
-    duration_minutes: 30
-    description: "Pregledi sklepov, hrbtenice, športne poškodbe"
-  okulist:
-    name: "Okulistični pregled"
-    price_range: "30-120 €"
-    duration_minutes: 30
-    description: "Očesni pregledi, predpis očal in leč"
-  laserski_poseg:
-    name: "Laserski poseg"
-    price_range: "50-200 €"
-    duration_minutes: 30
-    description: "Lasersko odstranjevanje žilic, bradavic, zdravljenje glivic"
-  estetski_poseg:
-    name: "Estetski poseg"
-    price_range: "100-400 €"
-    duration_minutes: 30
-    description: "Botox, fillerji, biorevitalizacija, radiofrekvenca"
-  kozmetika:
-    name: "Kozmetični salon"
-    price_range: "30-100 €"
-    duration_minutes: 60
-    description: "Nega obraza, tretmaji kože"
+    description: "Magnetnoresonančna tomografija glave, hrbtenice, sklepov, trebuha, dojk in ostalih delov telesa"
+  rtg:
+    name: "RTG slikanje"
+    price_range: "po napotnici ZZZS ali samoplačniško"
+    duration_minutes: 10
+    description: "Rentgensko slikanje kosti in skeletnih struktur"
+  uz:
+    name: "Ultrazvočna diagnostika"
+    price_range: "samoplačniško"
+    duration_minutes: 15
+    description: "UZ preiskave trebuha, sečil, ščitnice, dojk, sklepov in žil"
+  uz_poseg:
+    name: "UZ vodeni posegi"
+    price_range: "samoplačniško"
+    duration_minutes: 20
+    description: "Izpiranje kalcifikacij, blokade kortikosteroida, izpraznitev cist"
+  scitnica:
+    name: "Ambulanta za bolezni ščitnice"
+    price_range: "po napotnici ZZZS ali samoplačniško"
+    duration_minutes: 45
+    description: "Pregled in zdravljenje morfoloških in funkcionalnih sprememb žleze ščitnice"
 service_map:
-  dermatolog:
-    - "dermatolog"
-    - "dermatološki"
-    - "koža"
-    - "kozni"
-    - "kožne"
-    - "znamenje"
-    - "izpuščaj"
-  ortoped:
-    - "ortoped"
-    - "ortopedski"
-    - "ortopedija"
-    - "koleno"
+  mr:
+    - "mr"
+    - "magnetna resonanca"
+    - "magnetnoresonančna"
+    - "mri"
+    - "glava"
     - "hrbtenica"
-  okulist:
-    - "okulist"
-    - "okulistični"
-    - "očesni"
-    - "vid"
-  laserski_poseg:
-    - "laser"
-    - "laserski"
-    - "žilice"
-    - "bradavice"
-  estetski_poseg:
-    - "estetski"
-    - "botox"
-    - "filer"
-  kozmetika:
-    - "kozmetika"
-    - "kozmetični"
-    - "nega obraza"
+    - "sklep"
+    - "artrografija"
+    - "abdomen"
+    - "medenica"
+    - "prostata"
+    - "dojke"
+    - "prsni koš"
+    - "angiografija"
+    - "enterografija"
+    - "urografija"
+  rtg:
+    - "rtg"
+    - "rentgen"
+    - "rentgensko"
+    - "slikanje"
+    - "kosti"
+  uz:
+    - "uz"
+    - "ultrazvok"
+    - "ultrazvočni"
+    - "ultrazvočna"
+    - "eho"
+  uz_poseg:
+    - "kalcifikacije"
+    - "blokada"
+    - "kortikosteroid"
+    - "ganglion"
+    - "cista"
+    - "punkcija"
+  scitnica:
+    - "ščitnica"
+    - "scitnica"
+    - "ščitnična"
+    - "golša"
+    - "hipotiroza"
+    - "hipertiroza"
+    - "tireolog"
 unsupported_symptoms:
-  - id: "glavobol"
+  - id: "nujna_pomoc"
     keywords:
-      - "glava"
-      - "glavobol"
-      - "migrena"
-      - "boli me glava"
+      - "nujno"
+      - "hitro"
+      - "bolečina"
+      - "huda"
     response:
       - |
-        Razumem, glavobol je lahko zelo neprijeten.
+        Razumem, da imate težave.
 
-        Za začetek lahko pomaga počitek, dovolj tekočine in manj obremenitve (ekrani, hrup, stres). Če se glavobol stopnjuje, traja več dni ali se pojavijo dodatni simptomi, je priporočljiv čimprejšnji pregled.
+        Za nujno medicinsko pomoč prosim pokličite **112** ali obiščite najbližji urgentni center.
 
-         To ni zdravniški nasvet ali diagnoza, ampak splošna usmeritev.
-
-        V našem centru nimamo nevrologa. Lahko pa vam ponudim možnosti terminov pri specialistih, ki so pri nas na voljo.
-
-        Želite, da vam pokažem možnosti?
-      - |
-        Razumem, da imate težave z glavobolom.
-
-        Do pregleda lahko poskusite z mirovanjem, hidracijo in izogibanjem sprožilcem (npr. napor, premalo spanja, dolgotrajno delo za zaslonom).
-
-         To ni zdravniški nasvet ali diagnoza, ampak splošna usmeritev.
-
-        Ker pri nas nimamo nevrologa, vam lahko ponudim termine pri specialistih, ki so pri nas na voljo.
-
-        Želite, da vam pokažem možnosti?
-      - |
-        Hvala za opis težave.
-
-        Pri takih težavah je smiselno spremljati trajanje in jakost simptomov ter po potrebi čim prej opraviti pregled.
-
-         To ni zdravniški nasvet ali diagnoza, ampak splošna usmeritev.
-
-        Nevrologa pri nas žal nimamo, lahko pa vam pokažem razpoložljive možnosti pri specialistih, ki jih imamo.
-
-        Želite, da vam pokažem možnosti?
+        Medilab d.o.o. je diagnostični center — za naročanje na preiskave smo dosegljivi na **04 271 30 10** vsak dan od 07:00 do 18:00.
     quick_replies:
-      - label: "Da, predlagajte specialista"
+      - label: "Naroči se na preiskavo"
         value: "DA"
       - label: "Ne, hvala"
         value: "NE"
-  - id: "zobobol"
+  - id: "splosna_medicina"
     keywords:
-      - "zob"
-      - "zobobol"
-      - "skelenje"
-      - "dlesen"
-    response: "Žal mi je za težave z zobmi.  V našem centru nimamo zobozdravstvene ambulante, lahko pa ponudimo seznam nujnih zobozdravnikov v bližini ali termin pri splošnem zdravniku za protibolečinsko terapijo. Želite, da vas naročim na posvet?"
+      - "splošni zdravnik"
+      - "osebni zdravnik"
+      - "zdravstveni dom"
+    response: "Medilab d.o.o. je zasebni diagnostični center — ne nudimo splošne medicine. Za splošnega zdravnika se obrnite na Zdravstveni dom Kranj. Lahko vam pa pomagam z naročanjem na MR, RTG ali UZ preiskavo. Kaj potrebujete?"
     ui_override:
       type: "quick_replies"
       data:
-        - {label: "Da, prosim", value: "DA"}
-        - {label: "Ne, hvala", value: "NE"}
+        - {label: "MR preiskava", value: "MR"}
+        - {label: "RTG slikanje", value: "RTG"}
+        - {label: "Ultrazvok UZ", value: "UZ"}
+        - {label: "Ščitnica", value: "SCITNICA"}
 info_responses:
   pozdrav: |
-    Pozdravljeni! 
+    Pozdravljeni!
 
-    Sem vaš digitalni pomočnik v zdravstvenem centru. Kako vam lahko pomagam?
+    Sem vaš digitalni pomočnik Medilab d.o.o. diagnostičnega centra. Kako vam lahko pomagam?
 
-    Lahko vam pomagam z informacijami o naših storitvah, delovnem času, ali pa vas naročim na pregled, če želite.
+    Pomagam z informacijami o preiskavah (MR, RTG, UZ), čakalnih dobah, naročanjem ter ambulanto za bolezni ščitnice.
   kdo_si: |
-    Sem digitalni pomočnik zdravstvenega centra.
+    Sem digitalni pomočnik Medilab d.o.o. diagnostičnega centra v Kranju.
 
-    Z veseljem odgovorim na vprašanja o naših storitvah, cenah in razpoložljivih terminih.
-  splosno: "Sem virtualni asistent Zdravstvenega centra. Pomagam pri naročanju in informacijah o storitvah."
+    Z veseljem odgovorim na vprašanja o naših preiskavah (MR, RTG, UZ), čakalnih dobah in naročanju.
+  splosno: "Sem virtualni asistent diagnostičnega centra Medilab. Pomagam pri naročanju in informacijah o preiskavah MR, RTG, UZ in ambulanti za bolezni ščitnice."
   ekipa: |
-    Naš zdravstveni center vodi strokovna ekipa zdravnikov specialistov:
+    Naša strokovna ekipa:
 
-    🩺 **dr. Matjaž Novak**, dr. med. — direktor, ortoped
-    🩺 **dr. Ana Kos**, dr. med. — dermatolog
-    👁️ **dr. Petra Horvat**, dr. med. — okulist
-    💪 **Maja Vidmar** — fizioterapevt
-    ✨ **Tina Štefanič** — specialistka estetske medicine
+    🩺 **dr. Maja Kokalj**, dr. med., spec. radiolog — nevroradiologija, odgovorna nosilka dejavnosti
+    🩺 **dr. Andrej Vrečko**, dr. med., spec. radiolog — radiologija kostnomišičnega sistema
+    🩺 **dr. Lea Bartol**, dr. med., spec. radiolog — radiologija trebušnih organov
+    🩺 **dr. Klavdija Oblak**, dr. med., spec. internist — ambulanta za bolezni ščitnice
 
-    Za termini ali vprašanja: 01 432 10 20 | info@zc-novak.si
-  hvala: "Hvala za sporočilo! Če boste še kaj potrebovali, sem tukaj za vas. "
+    Za termini ali vprašanja: 04 271 30 10 | mr@medilab.si
+  hvala: "Hvala za zaupanje! Če boste še kaj potrebovali, sem tukaj za vas."
   pozdrav_variants:
     - "Živjo! Kako vam lahko danes pomagam?"
-    - "Dober dan! Sem vaš digitalni asistent. Kako lahko pomagam?"
+    - "Dober dan! Sem vaš digitalni asistent diagnostičnega centra Medilab. Kako lahko pomagam?"
   storitve_variants:
-    - "Nudimo dermatologa, ortopeda, okulista ter estetske/laserske posege in kozmetiko. Kaj vas zanima?"
-    - "Najpogosteje: dermatolog, ortoped, okulist, laser, estetika, kozmetika. Povejte, kaj iščete."
+    - "Nudimo MR preiskave, RTG slikanje, UZ diagnostiko, UZ vodene posege in ambulanto za bolezni ščitnice. Kaj vas zanima?"
+    - "Ponujamo: MR, RTG, UZ (samoplačniško), UZ vodene posege in tireološko ambulanto. Povejte, kaj iščete."
   cene_variants:
-    - "Cena je odvisna od storitve. Napišite, kateri pregled vas zanima, pa povem razpon."
-    - "Za točen znesek potrebujem storitev (npr. dermatolog, ortoped, okulist). Katera vas zanima?"
+    - "Cene so odvisne od vrste preiskave. MR in RTG so po napotnici ZZZS ali samoplačniško. UZ preiskave so izključno samoplačniško. Napišite, katera preiskava vas zanima."
+    - "Za točen znesek pokličite 04 271 30 10. UZ preiskave so samoplačniške, MR in RTG po napotnici ali samoplačniško."
   delovni_cas_variants:
-    - "Delovni čas: pon–pet 08:00–18:00, sob 09:00–13:00 (nujni termini), ned in prazniki zaprto."
+    - "Delovni čas: vsak dan 07:00–19:00. Samoplačniške storitve: vsak dan 07:00–08:00 in 18:00–19:00, ob sobotah 07:00–09:00."
   kontakt_variants:
-    - "Naslov: Cankarjeva 15, Ljubljana. Tel: 01 432 10 20. Email: info@zc-novak.si"
+    - "MR/RTG/UZ: 04 271 30 10 | mr@medilab.si. Ščitnica: 04 271 30 15 | scitnica@medilab.si. Naslov: Partizanska 12, Kranj."
   hvala_variants:
     - "Hvala! Če boste še kaj potrebovali, sem tukaj."

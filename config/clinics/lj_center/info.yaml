@@ -14,13 +14,13 @@ facts:
       - pridem do vas
     response:
       - |
-        Najdete nas na naslovu **Cankarjeva ulica 15, 1000 Ljubljana**.
-        Brezplačno parkirišče je urejeno tik pred vhodom.
+        Najdete nas na naslovu **Partizanska cesta 12, 4000 Kranj**.
+        Brezplačno parkirišče je urejeno neposredno pred vhodom (30 mest, vključno za invalide).
       - |
-        Smo na **Cankarjevi ulici 15 v Ljubljani** (bližina centra).
-        Pred vhodom je na voljo brezplačno parkiranje.
+        Smo na **Partizanski cesti 12 v Kranju**.
+        Dostopni z javnim prevozom (avtobus linija 1 in 3, postaja Partizanska — 2 min hoje).
       - |
-        Naša lokacija je **Cankarjeva 15, Ljubljana**.
+        Naša lokacija je **Partizanska 12, Kranj**.
         Parkirišče pred objektom je brezplačno za naše paciente.
 
   kontakt:
@@ -36,12 +36,11 @@ facts:
       - kako vas kontaktiram
       - kako pokličem
       - pokličem
-      - poklicem
     response: |
-      📞 Telefon: **01 432 10 20**
-      📧 Email: **info@zc-novak.si**
-      📍 Naslov: Cankarjeva ulica 15, 1000 Ljubljana
-      🕐 Delovni čas: pon–pet 08:00–18:00 | sob 09:00–13:00
+      📞 MR/RTG/UZ: **04 271 30 10** | mr@medilab.si
+      📞 Ščitnica: **04 271 30 15** | scitnica@medilab.si
+      📍 Partizanska cesta 12, 4000 Kranj
+      🕐 Vsak dan: 07:00–19:00
 
   delovni_cas:
     priority: fast
@@ -56,12 +55,11 @@ facts:
       - urnik
     response:
       - |
-        Delamo od ponedeljka do petka, **08:00–18:00**.
-        V soboto smo odprti od 09:00 do 13:00 (nujni termini).
-        Nedeljah in praznikih smo zaprti.
+        Delamo **vsak dan od 07:00 do 19:00**.
+        Samoplačniške storitve: vsak dan 07:00–08:00 in 18:00–19:00, ob sobotah 07:00–09:00.
       - |
-        Naš urnik: **pon–pet 08:00–18:00** | **sob 09:00–13:00**
-        Ob nedeljah in praznikih ne delamo.
+        Naš urnik: **vsak dan 07:00–19:00**
+        Samoplačniške preiskave v razširjenem urniku: 07:00–08:00 in 18:00–19:00 ter sobote 07:00–09:00.
 
   parkiranje:
     priority: medium
@@ -74,7 +72,7 @@ facts:
       - kje parkiram
     response: |
       Parkiranje je **brezplačno** za vse naše paciente.
-      Parkirišče se nahaja neposredno pred vhodom v center.
+      Parkirišče s 30 mesti (vključno s parkirnimi mesti za invalide) se nahaja neposredno pred vhodom.
 
   postopek_narocanja:
     priority: fast
@@ -85,18 +83,20 @@ facts:
       - kako naročim
       - postopek naročanja
       - kako rezerviram
-      - kako naroči
       - postopek
     response:
       - |
-        Naročanje je enostavno — kliknite gumb **📅 Naroči se** spodaj.
+        Naročanje je enostavno:
 
-        Izpolnite ime, telefon in vrsto pregleda.
-        Kontaktirali vas bomo za potrditev termina.
+        📞 Pokličite **04 271 30 10** (MR/RTG/UZ) ali **04 271 30 15** (ščitnica)
+        📧 Pišite na **mr@medilab.si** ali **scitnica@medilab.si**
+        🌐 Naročite prek spleta: www.medilab.si/narocanje
+
+        Za naročanje z napotnico ZZZS: cakalnedobe.ezdrav.si
       - |
         Kliknite **📅 Naroči se** v spodnjem delu pogovora.
 
-        Potrebujemo vaše ime, telefon in vrsto pregleda — kontaktirali vas bomo za potrditev.
+        Potrebujemo vaše ime, telefon in vrsto preiskave — kontaktirali vas bomo za potrditev.
 
   cene:
     priority: fast
@@ -108,22 +108,27 @@ facts:
       - koliko stane
       - kolk stane
       - cena pregleda
+      - cena mr
+      - cena rtg
+      - cena uz
     response:
       - |
-        Cene pregledov so odvisne od storitve:
-        - Dermatolog: 25–150 €
-        - Ortoped: 40–80 €
-        - Okulist: 30–120 €
-        - Laserski poseg: 50–200 €
-        - Estetski poseg: 100–400 €
-        - Kozmetika: 30–100 €
+        Cene preiskav:
+        - **MR**: po napotnici ZZZS (zavarovanci) ali samoplačniško
+        - **RTG**: po napotnici ZZZS ali samoplačniško
+        - **UZ diagnostika**: izključno samoplačniško
+        - **UZ vodeni posegi**: izključno samoplačniško
+        - **Ambulanta ščitnice**: po napotnici ZZZS ali samoplačniško
 
-        Povejte, za katero storitev vas zanima cena — povem vam natančen razpon.
+        Za točne cene samoplačniških storitev pokličite **04 271 30 10**.
       - |
-        Cenik po storitvah:
-        🩺 Dermatolog 25–150 € | Ortoped 40–80 € | Okulist 30–120 €
-        ✨ Laserski poseg 50–200 € | Estetski poseg 100–400 €
-        💆 Kozmetika 30–100 €
+        Cenik:
+        🧲 MR — po napotnici ZZZS ali samoplačniško
+        ☢️ RTG — po napotnici ZZZS ali samoplačniško
+        🔊 UZ preiskave — samoplačniško
+        🩺 Ščitnica — po napotnici ZZZS ali samoplačniško
+
+        Za točne samoplačniške cene: 04 271 30 10
 
   vodstvo:
     priority: fast
@@ -135,12 +140,11 @@ facts:
       - vodja
       - vodstvo
       - lastnik
-      - kdo je lastnik
       - ustanovitelj
     response: |
-      **Zdravstveni center Novak** vodi **dr. Matjaž Novak, dr. med.** — specialist ortopedske kirurgije z 20-letnimi izkušnjami.
+      **Medilab d.o.o.** vodita ustanoviteljici **dr. Maja Kokalj, dr. med., spec. radiolog** in **dr. Andrej Vrečko, dr. med., spec. radiolog**.
 
-      Center je bil ustanovljen leta 2010 z vizijo dostopne in kakovostne specialistične zdravstvene oskrbe v Ljubljani.
+      Center je bil ustanovljen leta 2009 z vizijo sodobne in dostopne medicinske diagnostike v Kranju.
 
   ekipa:
     priority: fast
@@ -150,19 +154,17 @@ facts:
       - zdravniki
       - kdo dela
       - tim
-      - specialists
       - kdo je pri vas
       - kakšna je ekipa
+      - radiolog
     response: |
       Naša strokovna ekipa:
 
-      🩺 **dr. Matjaž Novak** — ortoped, direktor
-      🩺 **dr. Ana Kos** — dermatolog
-      👁️ **dr. Petra Horvat** — okulist
-      💪 **Maja Vidmar** — fizioterapevt
-      ✨ **Tina Štefanič** — specialistka estetske medicine
-
-      Vsi strokovnjaki imajo dolgoletne izkušnje in redno sledijo novostim v stroki.
+      🩺 **dr. Maja Kokalj** — radiolog, nevroradiologija
+      🩺 **dr. Andrej Vrečko** — radiolog, kostnomišični sistem
+      🩺 **dr. Lea Bartol** — radiolog, trebušni organi
+      🩺 **dr. Klavdija Oblak** — internist, ambulanta za bolezni ščitnice
+      👨‍⚕️ **Miha Peternelj** — dipl. zdravstvenik, laboratorij
 
   o_centru:
     priority: medium
@@ -173,164 +175,97 @@ facts:
       - kaj ste
       - kdo ste
       - kaj ponujate
-      - kaj je zdravstveni center
       - opis
+      - medilab
     response: |
-      **Zdravstveni center Novak** je zasebna specialistična ambulanta v središču Ljubljane.
-
-      Ustanovljeni smo bili leta 2010. Ponujamo:
-      - Specialistične preglede (ortopedija, dermatologija, okulistika)
-      - Fizioterapijo in rehabilitacijo
-      - Laserske in estetske posege
-      - Kozmetične tretmaje
-
-      📍 Cankarjeva 15, Ljubljana | 📞 01 432 10 20
-
-  service_dermatolog:
-    priority: low
-    category: STORITVE_INFO
-    keywords:
-      - dermatolog
-      - dermatologija
-      - kožne težave
-      - koža
-      - rdečina
-      - izpuščaj
-      - luskavica
-      - akne
-    response: |
-      **Dermatologija** — dr. Ana Kos, dr. med.
-
-      Zdravimo:
-      - Izpuščaje, akne, ekceme in luskavico
-      - Kožne spremembe in madeže (benigni tumorji)
-      - Glivične okužbe
-
-      💰 Dermatološki pregled: 25–150 € (30 min)
-
-      Želite termin? Kliknite **📅 Naroči se** spodaj.
-
-  service_ortoped:
-    priority: low
-    category: STORITVE_INFO
-    keywords:
-      - ortoped
-      - ortopedija
-      - sklepi
-      - hrbtenica
-    response: |
-      **Ortopedija** — dr. Matjaž Novak, dr. med.
-
-      Zdravimo:
-      - Bolečine v hrbtu, kolenih, ramenih
-      - Športne poškodbe in poškodbe mišic/kit
-      - Težave s sklepi in hrbtenico
-
-      💰 Ortopedski pregled: 40–80 € (30 min)
-
-      Želite termin? Kliknite **📅 Naroči se** spodaj.
-
-  service_okulist:
-    priority: low
-    category: STORITVE_INFO
-    keywords:
-      - okulist
-      - oftalmolog
-      - očesni
-      - vid
-      - oči
-    response: |
-      **Oftalmologija** — dr. Petra Horvat, dr. med.
-
-      Pregledi:
-      - Težave z vidom in dioptrija
-      - Očesne bolezni in suhe oči
-      - Predpis očal in kontaktnih leč
-
-      💰 Očesni pregled: 30–120 € (30 min)
-
-      Želite termin? Kliknite **📅 Naroči se** spodaj.
-
-  service_fizioterapija:
-    priority: low
-    category: STORITVE_INFO
-    keywords:
-      - fizioterapija
-      - fizioterapevt
-      - rehabilitacija
-      - masaža
-    response: |
-      **Fizioterapija** — Maja Vidmar
-
-      Nudimo:
-      - Rehabilitacija po poškodbah in operacijah
-      - Terapevtske masaže vratu, hrbta, ramen
-      - Vaje za krepitev in razgibavanje
-
-      💰 Fizioterapija: 40–80 € (60 min)
-
-      Želite termin? Kliknite **📅 Naroči se** spodaj.
-
-  service_estetski_poseg:
-    priority: low
-    category: STORITVE_INFO
-    keywords:
-      - estetski
-      - botox
-      - filler
-      - estetika
-    response: |
-      **Estetski posegi** — Tina Štefanič
+      **Medilab d.o.o.** je zasebni diagnostični center v Kranju z več kot 15 let izkušnjami.
 
       Ponujamo:
-      - Botox (čelo, gubice)
-      - Fillerji (ustnice, lica)
-      - Biorevitalizacija in radiofrekvenca
+      - 🧲 Magnetnoresonančna tomografija (MR)
+      - ☢️ Rentgensko slikanje (RTG)
+      - 🔊 Ultrazvočna diagnostika (UZ) — samoplačniško
+      - 💉 UZ vodeni posegi — samoplačniško
+      - 🩺 Ambulanta za bolezni ščitnice
 
-      💰 Estetski poseg: 100–400 € (30 min)
+      📍 Partizanska 12, Kranj | 📞 04 271 30 10
 
-      Želite termin? Kliknite **📅 Naroči se** spodaj.
-
-  service_laserski_poseg:
+  service_mr:
     priority: low
     category: STORITVE_INFO
     keywords:
-      - laser
-      - laserski
-      - žilice
-      - bradavice
-      - glivice
+      - mr preiskava
+      - magnetna resonanca
+      - magnetnoresonančna
+      - mri
     response: |
-      **Laserski posegi**
+      **MR preiskave** — Medilab d.o.o.
 
-      Ponujamo:
-      - Odstranjevanje žilic na obrazu in nogah
-      - Odstranjevanje bradavic in kožnih sprememb
-      - Zdravljenje glivic nohtov
+      Izvajamo:
+      - MR glave in vratu
+      - MR hrbtenice (vratna, prsna, ledvena)
+      - MR sklepov (rama, koleno, gleženj, kolk, zapestje)
+      - MR artrografija
+      - MR trebuha, medenice, prostate, dojk
+      - MR angiografija (žilje)
 
-      💰 Laserski poseg: 50–200 € (30 min)
+      📞 Naročanje: **04 271 30 10** | mr@medilab.si
 
-      Želite termin? Kliknite **📅 Naroči se** spodaj.
-
-  service_kozmetika:
+  service_rtg:
     priority: low
     category: STORITVE_INFO
     keywords:
-      - kozmetika
-      - kozmetični
-      - nega obraza
-      - tretma
+      - rtg
+      - rentgen
+      - rentgensko
     response: |
-      **Kozmetični salon**
+      **RTG slikanje** — Medilab d.o.o.
 
-      Nudimo:
-      - Profesionalna nega obraza
-      - Globinsko čiščenje in hidratacija
-      - Tretmaji za problematično kožo
+      Izvajamo RTG slikanje kosti, skletnih struktur, prsnega koša in trebuha.
+      Preiskava je hitra (5–10 min) in neboleča.
 
-      💰 Kozmetični tretma: 30–100 € (60 min)
+      📞 Naročanje: **04 271 30 10** | mr@medilab.si
 
-      Želite termin? Kliknite **📅 Naroči se** spodaj.
+  service_uz:
+    priority: low
+    category: STORITVE_INFO
+    keywords:
+      - uz
+      - ultrazvok
+      - ultrazvočni
+      - ultrazvočna
+    response: |
+      **Ultrazvočna diagnostika (UZ)** — Medilab d.o.o.
+
+      Izvajamo:
+      - UZ trebuha
+      - UZ sečil in medenice
+      - UZ ščitnice
+      - UZ dojk
+      - UZ sklepov in mehkih tkiv
+      - UZ žil (Doppler)
+
+      UZ preiskave so **izključno samoplačniške**.
+      📞 Naročanje: **04 271 30 10** | mr@medilab.si
+
+  service_scitnica:
+    priority: low
+    category: STORITVE_INFO
+    keywords:
+      - ščitnica
+      - scitnica
+      - golša
+      - hipotiroza
+      - hipertiroza
+      - ščitnična
+    response: |
+      **Ambulanta za bolezni ščitnice** — dr. Klavdija Oblak
+
+      Zdravimo:
+      - Difuzno povečano in vozličasto žlezo (golša)
+      - Prekomerno izločanje ščitničnega hormona (hipertiroza)
+      - Zmanjšano izločanje ščitničnega hormona (hipotiroza)
+
+      📞 Naročanje: **04 271 30 15** | scitnica@medilab.si
 
   zdravstveni_nasvet_splosno:
     priority: medium
@@ -341,6 +276,6 @@ facts:
       - kako si pomagam
       - splošni nasvet
     response: |
-      Z veseljem vam dam splošen nasvet — povejte, katere težave imate, in usmerim vas k pravemu specialistu.
+      Z veseljem vas usmerim k pravi preiskavi ali specialistu.
 
       ⚠️ *Napomnik: nasveti, ki jih dajem, niso zdravniški nasvet ali diagnoza. Za natančno oceno vašega stanja vedno obiščite zdravnika.*

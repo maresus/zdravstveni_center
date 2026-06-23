@@ -1,647 +1,232 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Zdravstveni center</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medilab — AI asistent</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap');
-    :root {
-      --bg: #f0f5ff;
-      --card: #f8faff;
-      --text: #1e293b;
-      --muted: #4a5b8a;
-      --border: #c7d7f5;
-      --green: #1a56db;
-      --accent: #2563eb;
-      --bot-bg: #e8f0fe;
-      --user-bg: #ffffff;
-      --bot-text: #1e293b;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
     html, body {
-      height: 100%;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow: hidden;
+      margin: 0; padding: 0; height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-    .container { display: flex; flex-direction: column; height: 100%; }
-    .header {
-      padding: 14px 16px;
-      background: var(--card);
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
-      border-bottom: 1px solid var(--border);
+    body {
+      min-height: 100vh;
+      background:
+        linear-gradient(to bottom, rgba(0,10,40,0.55) 0%, rgba(0,20,60,0.35) 100%),
+        url('/static/bg.jpg') center 30% / cover no-repeat;
+      background-attachment: fixed;
+      padding: 56px 52px;
     }
-    .header-icon {
-      width: 36px; height: 36px;
-      background: #dbeafe;
-      border-radius: 50%;
+
+    /* LEVA VSEBINA */
+    .page-content { max-width: 560px; }
+
+    .logo-header {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+    }
+    .logo-icon {
+      width: 56px; height: 56px; border-radius: 12px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.25);
       display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
+      font-size: 26px;
     }
-    .header-text h1 { font-size: 1rem; font-weight: 600; margin-bottom: 2px; }
-    .header-text p { font-size: 0.75rem; color: var(--muted); }
-    .header-actions { margin-left: auto; display: flex; gap: 8px; }
-    .clear-btn {
-      background: var(--green);
-      border: none;
+    .logo-name { color: #fff; font-size: 20px; font-weight: 700; margin: 0 0 2px; letter-spacing: -0.2px; }
+    .logo-sub { color: rgba(255,255,255,0.65); font-size: 13px; margin: 0; font-weight: 400; }
+
+    .tagline {
+      color: #7ec8f4;
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      margin: 0 0 14px;
+    }
+    h1 {
       color: #fff;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      cursor: pointer;
+      font-size: 38px; font-weight: 700; line-height: 1.15;
+      margin: 0 0 18px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
     }
-    .clear-btn.secondary {
-      background: #e0eaff;
-      color: #1e3a6e;
+    h1 span { color: #7ec8f4; }
+
+    .desc {
+      color: rgba(255,255,255,0.88);
+      font-size: 17px; line-height: 1.6;
+      margin: 0 0 28px;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
     }
-    .clear-btn:hover { filter: brightness(0.95); }
-    .messages {
-      flex: 1; overflow-y: auto; padding: 16px;
-      background: #fff;
-      display: flex; flex-direction: column; gap: 12px;
+
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-size: 13px; font-weight: 500;
+      padding: 7px 16px; border-radius: 24px;
     }
-    .msg {
-      max-width: 85%; padding: 10px 14px; border-radius: 16px;
-      font-size: 0.9rem; line-height: 1.45;
-      white-space: pre-wrap; word-wrap: break-word;
+    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; }
+
+    .services {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+      max-width: 480px;
     }
-    .msg.user {
-      margin-left: auto; background: var(--user-bg);
-      color: var(--text); border: 1px solid var(--border);
-      border-bottom-right-radius: 4px;
-    }
-    .msg.bot {
-      margin-right: auto; background: var(--bot-bg);
-      color: var(--text); border-bottom-left-radius: 4px;
-    }
-    .ui-actions {
-      margin-top: 10px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .ui-actions .ui-btn {
-      background: #dbeafe;
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 6px 10px;
+    .service-card {
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.18);
       border-radius: 12px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      font-weight: 600;
+      padding: 14px 16px;
+      color: #fff;
     }
-    .ui-date {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      align-items: center;
-    }
-    .ui-date input[type="date"] {
-      border: 1px solid var(--border);
-      padding: 6px 8px;
-      border-radius: 10px;
-      font-size: 0.75rem;
-    }
-    .ui-label {
-      width: 100%;
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-    .msg.typing { background: var(--bot-bg); color: var(--bot-text); padding: 12px 18px; }
-    .typing-dots { display: flex; gap: 4px; }
-    .typing-dots span {
-      width: 8px; height: 8px; background: var(--bot-text);
-      border-radius: 50%; animation: bounce 1.4s infinite ease-in-out;
-    }
-    .typing-dots span:nth-child(1) { animation-delay: 0s; }
-    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes bounce {
-      0%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-6px); }
-    }
-    .quick-btns {
-      display: flex; flex-wrap: wrap; gap: 6px;
-      padding: 0 16px 12px; background: var(--card);
-    }
-    .quick-btn {
-      padding: 6px 12px; border-radius: 20px;
-      background: #fff; border: 1px solid var(--border);
-      font-size: 0.8rem; cursor: pointer; transition: all 0.15s;
-    }
-    .quick-btn:hover {
-      background: #dbeafe; color: var(--text); border-color: var(--accent);
-    }
-    .input-area {
-      padding: 12px 16px; background: var(--card);
-      border-top: 1px solid var(--border);
-      display: flex; gap: 10px; align-items: flex-end; flex-shrink: 0;
-    }
-    .input-area textarea {
-      flex: 1; min-height: 42px; max-height: 100px;
-      padding: 10px 14px; border: 1px solid var(--border);
-      border-radius: 16px; font-family: inherit; font-size: 0.9rem;
-      resize: none; outline: none; line-height: 1.4;
-    }
-    .input-area textarea:focus { border-color: var(--accent); }
-    .input-area button {
-      width: 42px; height: 42px; border-radius: 50%;
-      border: none; background: var(--green); color: white;
-      cursor: pointer; display: flex; align-items: center;
-      justify-content: center; transition: background 0.15s; flex-shrink: 0;
-    }
-    .input-area button:hover { filter: brightness(0.95); }
-    .input-area button:disabled { opacity: 0.5; cursor: not-allowed; }
-    .input-area button svg { width: 20px; height: 20px; fill: currentColor; }
-    .powered {
-      padding: 8px; text-align: center; font-size: 0.7rem;
-      color: var(--muted); background: var(--bg);
-    }
-    .powered a { color: var(--accent); text-decoration: none; }
+    .service-card .s-icon { font-size: 20px; margin-bottom: 6px; }
+    .service-card .s-title { font-size: 14px; font-weight: 600; margin: 0 0 2px; }
+    .service-card .s-sub { font-size: 12px; color: rgba(255,255,255,0.65); margin: 0; }
 
-    /* Booking form overlay */
-    .booking-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.4);
-      display: none; align-items: flex-end; justify-content: center;
-      z-index: 100;
+    /* FLOATING CHAT WIDGET */
+    #kv-bubble {
+      position: fixed; bottom: 28px; right: 28px; z-index: 9999;
+      width: 62px; height: 62px; border-radius: 50%;
+      background: linear-gradient(135deg, #1e6fc8, #0f4fa8);
+      box-shadow: 0 4px 20px rgba(15,79,168,0.5);
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .booking-overlay.open { display: flex; }
-    .booking-sheet {
-      background: #fff;
-      border-radius: 20px 20px 0 0;
-      padding: 20px 18px 28px;
-      width: 100%; max-width: 480px;
-      max-height: 90vh;
-      overflow-y: auto;
-      animation: slide-up 0.25s ease;
+    #kv-bubble:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(15,79,168,0.65); }
+    #kv-bubble svg { width: 28px; height: 28px; fill: #fff; }
+
+    #kv-badge {
+      position: fixed; bottom: 84px; right: 28px; z-index: 9999;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+      color: #fff; font-size: 13px; font-weight: 500;
+      padding: 7px 14px; border-radius: 20px;
+      white-space: nowrap; pointer-events: none;
+      opacity: 1; transition: opacity 0.3s;
     }
-    @keyframes slide-up {
-      from { transform: translateY(40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .sheet-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .sheet-header h2 { font-size: 1rem; font-weight: 700; }
-    .sheet-close {
-      background: none; border: none; font-size: 1.2rem;
-      cursor: pointer; color: var(--muted); padding: 4px;
-    }
-    .form-field { margin-bottom: 12px; }
-    .form-field label {
-      display: block; font-size: 0.78rem; font-weight: 600;
-      color: var(--muted); margin-bottom: 4px;
-    }
-    .form-field input, .form-field select, .form-field textarea {
-      width: 100%; padding: 10px 12px;
-      border: 1px solid var(--border); border-radius: 10px;
-      font-family: inherit; font-size: 0.88rem;
-      background: var(--bg); outline: none;
-    }
-    .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-      border-color: var(--accent);
-    }
-    .form-field textarea { min-height: 70px; resize: none; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .submit-btn {
-      width: 100%; padding: 12px;
-      background: var(--green); color: #fff;
-      border: none; border-radius: 12px;
-      font-size: 0.92rem; font-weight: 700;
-      cursor: pointer; margin-top: 6px;
-    }
-    .submit-btn:hover { filter: brightness(0.95); }
-    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .form-success {
-      text-align: center; padding: 20px 10px;
+
+    #kv-panel {
+      position: fixed; bottom: 100px; right: 28px; z-index: 9998;
+      width: 390px; height: 620px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.35);
       display: none;
+      flex-direction: column;
+      border: 1px solid rgba(255,255,255,0.15);
     }
-    .form-success .icon { font-size: 2.5rem; margin-bottom: 10px; }
-    .form-success p { font-size: 0.9rem; color: var(--muted); }
+    #kv-panel iframe {
+      width: 100%; height: 100%;
+      border: none;
+    }
 
-    .narocise-btn {
-      padding: 8px 16px; border-radius: 20px;
-      background: var(--green); color: #fff;
-      border: none; font-size: 0.82rem; font-weight: 600;
-      cursor: pointer; transition: all 0.15s;
-      display: flex; align-items: center; gap: 6px;
+    @media (max-width: 680px) {
+      body { padding: 32px 24px; }
+      h1 { font-size: 28px; }
+      .services { grid-template-columns: 1fr; }
+      #kv-panel { width: calc(100vw - 24px); right: 12px; bottom: 90px; height: 70vh; }
+      #kv-bubble { right: 16px; bottom: 16px; }
+      #kv-badge { right: 16px; bottom: 72px; }
     }
-    .narocise-btn:hover { filter: brightness(0.9); }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="header-icon">🏥</div>
-      <div class="header-text">
-        <h1>Zdravstveni center</h1>
-        <p>Vprašajte me o pregledih in naročanju</p>
-      </div>
-      <div class="header-actions">
-        <button class="clear-btn" id="clearBtn" title="Počisti zgodovino">Asistent – pomoč</button>
-        <button class="clear-btn secondary" id="newSessionBtn" title="Nova seja">Nova seja</button>
+
+  <div class="page-content">
+
+    <div class="logo-header">
+      <div class="logo-icon">🏥</div>
+      <div>
+        <p class="logo-name">Diagnostični center Medilab</p>
+        <p class="logo-sub">Diagnostika · Ambulanta · Naročanje</p>
       </div>
     </div>
-    <div class="messages" id="messages"></div>
-    <div class="quick-btns" id="quickBtns">
-      <button class="quick-btn" data-msg="Kako poteka naročanje na pregled?">Naročanje</button>
-      <button class="quick-btn" data-msg="Imate cenik storitev?">Cenik</button>
-      <button class="quick-btn" data-msg="Kje vas najdem?">Kontakt</button>
-      <button class="quick-btn" data-msg="Katere preglede in posege izvajate?">Pregledi</button>
+
+    <p class="tagline">AI digitalni asistent</p>
+    <h1>Naročite se<br><span>hitro in enostavno.</span></h1>
+
+    <p class="desc">
+      Virtualni asistent vam 24/7 odgovori na vprašanja o preiskavah,
+      čakalnih dobah in naročanju — ter vas v minutah naroči
+      na MR, RTG, UZ ali ambulantni pregled.
+    </p>
+
+    <div class="badges">
+      <span class="badge"><span class="dot"></span> Na voljo 24/7</span>
+      <span class="badge">🔬 MR · RTG · UZ</span>
+      <span class="badge">📅 Naročanje v minutah</span>
+      <span class="badge">🔒 Zasebno in varno</span>
     </div>
-    <div id="narociseBar" style="padding:10px 16px;background:#e8f0fe;border-top:1px solid #c7d7f5;flex-shrink:0;display:block;">
-      <button class="narocise-btn" id="narociseBtn" style="width:100%;justify-content:center;padding:12px 16px;font-size:0.92rem;background:#1a56db;color:#fff;border:none;border-radius:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;">📅 Naroči se na pregled</button>
+
+    <div class="services">
+      <div class="service-card">
+        <div class="s-icon">🧲</div>
+        <p class="s-title">MR preiskave</p>
+        <p class="s-sub">Glava, hrbtenica, sklepi, trebuh</p>
+      </div>
+      <div class="service-card">
+        <div class="s-icon">☢️</div>
+        <p class="s-title">RTG slikanje</p>
+        <p class="s-sub">Samoplačniško in po napotnici</p>
+      </div>
+      <div class="service-card">
+        <div class="s-icon">🔊</div>
+        <p class="s-title">Ultrazvok (UZ)</p>
+        <p class="s-sub">Diagnostika in UZ vodeni posegi</p>
+      </div>
+      <div class="service-card">
+        <div class="s-icon">🩺</div>
+        <p class="s-title">Ambulanta ščitnice</p>
+        <p class="s-sub">Funkcionalne in morfološke spremembe</p>
+      </div>
     </div>
-    <div class="input-area">
-      <textarea id="input" placeholder="Napišite sporočilo..." rows="1"></textarea>
-      <button id="sendBtn" aria-label="Pošlji">
-        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-      </button>
-    </div>
-    <div class="powered">Ustvaril zdravstveni center</div>
+
   </div>
 
-  <!-- Booking overlay -->
-  <div class="booking-overlay" id="bookingOverlay">
-    <div class="booking-sheet">
-      <div class="sheet-header">
-        <h2>📅 Naročite se na pregled</h2>
-        <button class="sheet-close" id="closeSheet">✕</button>
-      </div>
-      <div id="bookingForm">
-        <div class="form-row">
-          <div class="form-field">
-            <label>Ime in priimek *</label>
-            <input type="text" id="bf-name" placeholder="Janez Novak" required />
-          </div>
-          <div class="form-field">
-            <label>Telefon *</label>
-            <input type="tel" id="bf-phone" placeholder="041 123 456" required />
-          </div>
-        </div>
-        <div class="form-field">
-          <label>E-pošta</label>
-          <input type="email" id="bf-email" placeholder="ime@email.com" />
-        </div>
-        <div class="form-field">
-          <label>Storitev *</label>
-          <select id="bf-service">
-            <option value="">— Izberite storitev —</option>
-            <option value="Dermatolog">Dermatolog</option>
-            <option value="Ortoped">Ortoped</option>
-            <option value="Okulist">Okulist</option>
-            <option value="Laserski poseg">Laserski poseg</option>
-            <option value="Estetski poseg">Estetski poseg</option>
-            <option value="Fizioterapija">Fizioterapija</option>
-            <option value="Kozmetika">Kozmetika</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <div class="form-field">
-            <label>Želeni datum</label>
-            <input type="date" id="bf-date" />
-          </div>
-          <div class="form-field">
-            <label>Želena ura</label>
-            <input type="time" id="bf-time" min="08:00" max="18:00" />
-          </div>
-        </div>
-        <div class="form-field">
-          <label>Opomba (opcijsko)</label>
-          <textarea id="bf-note" placeholder="Opišite težavo ali dodajte posebne zahteve…"></textarea>
-        </div>
-        <button class="submit-btn" id="submitBooking">Pošlji prijavo</button>
-      </div>
-      <div class="form-success" id="formSuccess">
-        <div class="icon">✅</div>
-        <h3 style="margin-bottom:8px">Hvala za prijavo!</h3>
-        <p>Kontaktirali vas bomo v kratkem za potrditev termina.</p>
-      </div>
-    </div>
+  <!-- Floating badge -->
+  <div id="kv-badge">💬 Vprašajte asistenta</div>
+
+  <!-- Floating button -->
+  <button id="kv-bubble" onclick="togglePanel()" aria-label="Odpri klepet">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+    </svg>
+  </button>
+
+  <!-- Chat panel (iframe) -->
+  <div id="kv-panel">
+    <iframe id="kv-iframe" src="" title="Medilab AI asistent" allow="clipboard-write"></iframe>
   </div>
 
   <script>
-    const STORAGE_KEY = 'health_center_chat_history';
-    const MAX_MESSAGES = 50;
-    
-    const messagesEl = document.getElementById('messages');
-    const inputEl = document.getElementById('input');
-    const sendBtn = document.getElementById('sendBtn');
-    const quickBtns = document.getElementById('quickBtns');
-    const clearBtn = document.getElementById('clearBtn');
-    const newSessionBtn = document.getElementById('newSessionBtn');
-    
-    // Load history from localStorage
-    function loadHistory() {
-      try {
-        const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-          const messages = JSON.parse(saved);
-          if (messages.length > 0) {
-            messages.forEach(m => addMessageToDOM(m.text, m.who, false));
-            quickBtns.style.display = 'none';
-            return true;
-          }
+    var panelOpen = false;
+    var badgeEl = document.getElementById('kv-badge');
+    var panelEl = document.getElementById('kv-panel');
+    var iframeEl = document.getElementById('kv-iframe');
+    var loaded = false;
+
+    // Skrij badge po 4s
+    setTimeout(function() {
+      badgeEl.style.opacity = '0';
+      setTimeout(function() { badgeEl.style.display = 'none'; }, 400);
+    }, 4000);
+
+    function togglePanel() {
+      panelOpen = !panelOpen;
+      if (panelOpen) {
+        panelEl.style.display = 'flex';
+        if (!loaded) {
+          iframeEl.src = '/';
+          loaded = true;
         }
-      } catch (e) { console.error('Error loading history:', e); }
-      return false;
-    }
-    
-    // Save history to localStorage
-    function saveHistory() {
-      try {
-        const messages = [];
-        document.querySelectorAll('.msg:not(.typing)').forEach(el => {
-          messages.push({
-            text: el.textContent,
-            who: el.classList.contains('user') ? 'user' : 'bot'
-          });
-        });
-        // Keep only last MAX_MESSAGES
-        const toSave = messages.slice(-MAX_MESSAGES);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-      } catch (e) { console.error('Error saving history:', e); }
-    }
-    
-    // Clear history
-    function clearHistory() {
-      localStorage.removeItem(STORAGE_KEY);
-      messagesEl.innerHTML = '';
-      addMessageToDOM('Pozdravljeni! Kako vam lahko pomagam?', 'bot', false);
-      quickBtns.style.display = 'flex';
-    }
-    
-    function scrollToBottom() {
-      messagesEl.scrollTop = messagesEl.scrollHeight;
-    }
-
-    function addMessageToDOM(text, who, save = true, metadata = null) {
-      const div = document.createElement('div');
-      div.className = 'msg ' + who;
-      div.textContent = text;
-      messagesEl.appendChild(div);
-      scrollToBottom();
-      if (save) saveHistory();
-      if (who === 'bot' && metadata?.ui) {
-        renderUiActions(div, metadata.ui);
-        scrollToBottom();
-      }
-      return div;
-    }
-
-    function showTyping() {
-      const div = document.createElement('div');
-      div.className = 'msg bot typing';
-      div.id = 'typing';
-      div.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
-      messagesEl.appendChild(div);
-      scrollToBottom();
-    }
-    
-    function hideTyping() {
-      const el = document.getElementById('typing');
-      if (el) el.remove();
-    }
-    
-    const sessionKey = 'chat_session_id';
-    let sessionId = localStorage.getItem(sessionKey);
-    if (!sessionId) {
-      sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
-      localStorage.setItem(sessionKey, sessionId);
-    }
-
-    function resetSession() {
-      localStorage.removeItem(sessionKey);
-      sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
-      localStorage.setItem(sessionKey, sessionId);
-    }
-
-    function formatDateToDotted(isoDate) {
-      const [year, month, day] = isoDate.split('-');
-      return `${day}.${month}.${year}`;
-    }
-
-    function renderUiActions(container, ui) {
-      const actions = document.createElement('div');
-      actions.className = 'ui-actions';
-
-      if (ui?.label) {
-        const label = document.createElement('div');
-        label.className = 'ui-label';
-        label.textContent = ui.label;
-        actions.appendChild(label);
-      }
-
-      if (ui?.type === 'date_picker') {
-        const wrap = document.createElement('div');
-        wrap.className = 'ui-date';
-
-        const input = document.createElement('input');
-        input.type = 'date';
-        if (ui.min_date) input.min = ui.min_date;
-
-        const btn = document.createElement('button');
-        btn.className = 'ui-btn';
-        btn.textContent = 'Potrdi';
-        btn.addEventListener('click', () => {
-          if (!input.value) return;
-          const formatted = formatDateToDotted(input.value);
-          sendMessage(formatted);
-        });
-
-        wrap.appendChild(input);
-        wrap.appendChild(btn);
-        actions.appendChild(wrap);
-      } else if (ui?.type === 'time_slots' && Array.isArray(ui.slots)) {
-        ui.slots.forEach(slot => {
-          const btn = document.createElement('button');
-          btn.className = 'ui-btn';
-          btn.textContent = slot;
-          btn.addEventListener('click', () => sendMessage(slot));
-          actions.appendChild(btn);
-        });
-      } else if (ui?.type === 'confirm' && Array.isArray(ui.options)) {
-        ui.options.forEach(option => {
-          const btn = document.createElement('button');
-          btn.className = 'ui-btn';
-          btn.textContent = option;
-          btn.addEventListener('click', () => sendMessage(option));
-          actions.appendChild(btn);
-        });
-      } else if (ui?.type === 'service_select' && Array.isArray(ui.options)) {
-        ui.options.forEach(option => {
-          const btn = document.createElement('button');
-          btn.className = 'ui-btn';
-          btn.textContent = option.label || option.value;
-          btn.addEventListener('click', () => sendMessage(option.value || option.label));
-          actions.appendChild(btn);
-        });
-      }
-
-      if (actions.children.length > 0) {
-        container.appendChild(actions);
+        badgeEl.style.display = 'none';
+      } else {
+        panelEl.style.display = 'none';
       }
     }
-
-    async function sendMessage(text) {
-      if (!text.trim()) return;
-      addMessageToDOM(text, 'user');
-      inputEl.value = '';
-      inputEl.style.height = 'auto';
-      sendBtn.disabled = true;
-      quickBtns.style.display = 'none';
-      showTyping();
-      try {
-        const res = await fetch('/chat/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, session_id: sessionId })
-      });
-        hideTyping();
-        if (res.ok) {
-          // Parse JSON response
-          const data = await res.json();
-          const displayText = data?.display_text ?? data?.text ?? data?.reply ?? 'Oprostite, prišlo je do napake.';
-          const actionSuggestion = data?.action_suggestion ?? data?.metadata?.action_suggestion;
-          const finalText = actionSuggestion ? `${displayText}\n\n💡 ${actionSuggestion}` : displayText;
-          addMessageToDOM(finalText, 'bot', true, data?.metadata ?? null);
-        } else {
-          addMessageToDOM('Oprostite, strežnik ni dosegljiv.', 'bot');
-        }
-      } catch (err) {
-        hideTyping();
-        addMessageToDOM('Oprostite, prišlo je do napake pri povezavi.', 'bot');
-      }
-      sendBtn.disabled = false;
-      inputEl.focus();
-    }
-    
-    // Event listeners
-    sendBtn.addEventListener('click', () => sendMessage(inputEl.value));
-    clearBtn.addEventListener('click', clearHistory);
-    newSessionBtn.addEventListener('click', () => {
-      clearHistory();
-      resetSession();
-    });
-    
-    inputEl.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage(inputEl.value);
-      }
-    });
-    
-    inputEl.addEventListener('input', () => {
-      inputEl.style.height = 'auto';
-      inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
-    });
-    
-    document.querySelectorAll('.quick-btn').forEach(btn => {
-      btn.addEventListener('click', () => { sendMessage(btn.dataset.msg); });
-    });
-    
-    // Initialize
-    const hasHistory = loadHistory();
-    if (!hasHistory) {
-      addMessageToDOM('Pozdravljeni! Kako vam lahko pomagam?', 'bot', false);
-    }
-
-    // Booking form logic
-    const overlay = document.getElementById('bookingOverlay');
-    const narociseBtn = document.getElementById('narociseBtn');
-    const closeSheet = document.getElementById('closeSheet');
-    const submitBooking = document.getElementById('submitBooking');
-    const formSuccess = document.getElementById('formSuccess');
-    const bookingForm = document.getElementById('bookingForm');
-
-    function openBookingForm(preselect) {
-      overlay.classList.add('open');
-      if (preselect) {
-        const sel = document.getElementById('bf-service');
-        for (let i = 0; i < sel.options.length; i++) {
-          if (sel.options[i].value.toLowerCase().includes(preselect.toLowerCase())) {
-            sel.selectedIndex = i;
-            break;
-          }
-        }
-      }
-      // Set min date to today
-      const today = new Date().toISOString().split('T')[0];
-      document.getElementById('bf-date').min = today;
-    }
-
-    function closeBookingForm() {
-      overlay.classList.remove('open');
-    }
-
-    narociseBtn.addEventListener('click', () => openBookingForm());
-    closeSheet.addEventListener('click', closeBookingForm);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeBookingForm(); });
-
-    submitBooking.addEventListener('click', async () => {
-      const name = document.getElementById('bf-name').value.trim();
-      const phone = document.getElementById('bf-phone').value.trim();
-      const service = document.getElementById('bf-service').value;
-
-      if (!name || !phone || !service) {
-        alert('Prosimo izpolnite ime, telefon in storitev.');
-        return;
-      }
-
-      submitBooking.disabled = true;
-      submitBooking.textContent = 'Pošiljam…';
-
-      const bfTime = document.getElementById('bf-time').value;
-      const payload = {
-        message: `Naročilo za pregled: ${service}. Ime: ${name}, tel: ${phone}` +
-          (document.getElementById('bf-email').value ? `, email: ${document.getElementById('bf-email').value}` : '') +
-          (document.getElementById('bf-date').value ? `, datum: ${document.getElementById('bf-date').value}` : '') +
-          (bfTime ? `, ura: ${bfTime}` : '') +
-          (document.getElementById('bf-note').value ? `, opomba: ${document.getElementById('bf-note').value}` : ''),
-        session_id: sessionId,
-        booking_form: {
-          name,
-          phone,
-          email: document.getElementById('bf-email').value.trim(),
-          service,
-          date: document.getElementById('bf-date').value + (bfTime ? ` ${bfTime}` : ''),
-          note: document.getElementById('bf-note').value.trim(),
-        }
-      };
-
-      try {
-        await fetch('/chat/', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-      } catch(e) {}
-
-      bookingForm.style.display = 'none';
-      formSuccess.style.display = 'block';
-
-      addMessageToDOM(`Naročen/-a za: ${service}\nIme: ${name} | Tel: ${phone}`, 'user');
-      addMessageToDOM('Hvala za prijavo! Kontaktirali vas bomo za potrditev termina.', 'bot');
-
-      setTimeout(() => {
-        closeBookingForm();
-        bookingForm.style.display = 'block';
-        formSuccess.style.display = 'none';
-        submitBooking.disabled = false;
-        submitBooking.textContent = 'Pošlji prijavo';
-        document.getElementById('bf-name').value = '';
-        document.getElementById('bf-phone').value = '';
-        document.getElementById('bf-email').value = '';
-        document.getElementById('bf-service').selectedIndex = 0;
-        document.getElementById('bf-date').value = '';
-        document.getElementById('bf-time').value = '';
-        document.getElementById('bf-note').value = '';
-      }, 3000);
-    });
   </script>
+
 </body>
 </html>

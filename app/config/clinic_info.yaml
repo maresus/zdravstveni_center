@@ -1,13 +1,13 @@
 clinic:
-  name: "Zdravstveni center Ljubljana"
-  address: "Zdraviliška ulica 12, 1000 Ljubljana"
-  phone: "01 234 56 78"
-  email: "info@zdravstveni-center.si"
+  name: "Medilab d.o.o."
+  address: "Partizanska cesta 12, 4000 Kranj"
+  phone: "04 271 30 10"
+  email: "mr@medilab.si"
   hours:
-    weekdays: "8:00 - 18:00"
-    saturday: "9:00 - 13:00 (samo nujni primeri)"
-    sunday: "Zaprto"
+    weekdays: "07:00 - 19:00"
+    saturday: "07:00 - 09:00 (samoplačniške storitve)"
+    sunday: "Po dogovoru"
   parking:
     free: true
-    capacity: 50
+    capacity: 30
     disability_spots: true
