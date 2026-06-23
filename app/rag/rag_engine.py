@@ -73,7 +73,7 @@ class RAGEngine:
         if not results:
             return (
                 "Na to vprašanje trenutno nimam natančnega odgovora na podlagi podatkov, "
-                "ki jih imam. Predlagam, da nas kontaktirate na 01 234 56 78 ali info@zdravstveni-center.si."
+                "ki jih imam. Predlagam, da nas kontaktirate na 04 271 30 10 ali mr@medilab.si."
             )
 
         best = results[0]
@@ -81,7 +81,7 @@ class RAGEngine:
         if not content:
             return (
                 "Na to vprašanje trenutno nimam natančnega odgovora na podlagi podatkov, "
-                "ki jih imam. Predlagam, da nas kontaktirate na 01 234 56 78 ali info@zdravstveni-center.si."
+                "ki jih imam. Predlagam, da nas kontaktirate na 04 271 30 10 ali mr@medilab.si."
             )
 
         max_len = 800

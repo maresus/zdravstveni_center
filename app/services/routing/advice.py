@@ -13,7 +13,7 @@ def generate_health_advice(symptom_description: str) -> str:
     try:
         llm_client = get_llm_client()
 
-        system_prompt = """Si prijazen pomočnik Zdravstvenega centra Novak v Ljubljani. Daj SPLOŠNE nasvete (počitek, obkladki, razgibavanje) — NIKOLI diagnoz, zdravil ali doziranja.
+        system_prompt = """Si prijazen pomočnik diagnostičnega centra Medilab d.o.o. v Kranju. Daj SPLOŠNE nasvete (počitek, obkladki, razgibavanje) — NIKOLI diagnoz, zdravil ali doziranja.
 
 Format: kratek empatičen uvod + 2 konkretni alineji nasveta + disclaimer + priporočilo specialista.
 Največ 100 besed.
@@ -147,13 +147,11 @@ DISCLAIMER = "\n\n⚠️ *To je splošna usmeritev, ne zdravniški nasvet ali di
 def advice_only(service: Optional[str]) -> str:
     base = _advice_only(service)
     cta_by_service = {
-        "ORTOPED": "Če želite, vas lahko zdaj naročim na ortopedski pregled pri dr. Novaku.",
-        "DERMATOLOG": "Če želite, vas lahko zdaj naročim na dermatološki pregled pri dr. Kos.",
-        "OKULIST": "Če želite, vas lahko zdaj naročim na okulistični pregled pri dr. Horvat.",
-        "ESTETSKI_POSEG": "Če želite, lahko skupaj preveriva prost termin za estetski poseg.",
-        "LASERSKI_POSEG": "Če želite, lahko takoj preverim prost termin za laserski poseg.",
-        "KOZMETIKA": "Če želite, lahko zdaj preverim prost termin za kozmetični tretma.",
-        "FIZIOTERAPIJA": "Če želite, vas lahko zdaj naročim na fizioterapijo pri Maji Vidmar.",
+        "MR": "Če želite, vas lahko zdaj naročim na MR preiskavo pri dr. Kokalj ali dr. Vrečku.",
+        "RTG": "Če želite, vas lahko zdaj naročim na RTG slikanje.",
+        "UZ": "Če želite, vas lahko zdaj naročim na ultrazvočno preiskavo.",
+        "UZ_POSEG": "Če želite, lahko preverim prost termin za UZ vodeni poseg.",
+        "SCITNICA": "Če želite, vas lahko zdaj naročim na pregled ščitnice pri dr. Oblak.",
     }
     normalized = service.upper() if service else None
     cta = cta_by_service.get(normalized, "Če želite, lahko zdaj preverim najhitrejši prosti termin.")

@@ -507,7 +507,7 @@ def handle_unified_routing(
     change_action = detect_appointment_change_request(message)
     if change_action in {"reschedule", "cancel"}:
         contact_text = _get_info_response(INFO_KEY_CONTACT, clinic_id=clinic_id)
-        phone = _extract_primary_phone(contact_text) or "01 234 56 78"
+        phone = _extract_primary_phone(contact_text) or "04 271 30 10"
         email = _extract_primary_email(contact_text)
         return build_appointment_change_reply(change_action, phone=phone, email=email)
 
@@ -1145,7 +1145,7 @@ async def sms_webhook(
             reply_text = (chat_resp.reply or "").strip()
 
         if not reply_text:
-            reply_text = "Hvala za sporočilo. Za pomoč pokličite 01 234 56 78."
+            reply_text = "Hvala za sporočilo. Za pomoč pokličite 04 271 30 10."
         send_result = send_sms(from_value, reply_text)
 
         if reservation_id and reply_text:

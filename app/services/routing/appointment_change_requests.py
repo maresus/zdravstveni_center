@@ -66,7 +66,7 @@ def detect_appointment_change_request(message: str) -> ChangeAction | None:
 
 
 def build_appointment_change_reply(action: ChangeAction, *, phone: str | None, email: str | None) -> str:
-    phone_txt = phone or "01 234 56 78"
+    phone_txt = phone or "04 271 30 10"
     email_part = f" ali pišite na {email}" if email else ""
     if action == "reschedule":
         return (
