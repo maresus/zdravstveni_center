@@ -22,19 +22,38 @@ def _ts(days_offset: int = 0, hour: int = 9, minute: int = 0) -> str:
 
 def _date(days_offset: int = 0) -> str:
     dt = datetime.now() + timedelta(days=days_offset)
-    return dt.strftime("%-d.%-m.%Y")
+    return dt.strftime("%d.%m.%Y")
+
+
+DEMO_MARKER = "chat"  # source vrednost ki jo seeder vstavi
 
 
 def seed_demo(svc: ReservationService) -> None:
     conn = svc._conn()
+    ph = svc._placeholder()
     try:
         cur = conn.cursor()
-        cur.execute("SELECT COUNT(1) FROM reservations")
+        # Preveri ali so podatki že iz tega seeda (preverimo datum prvega vnosa)
+        cur.execute("SELECT COUNT(1) FROM reservations WHERE source = 'chat'")
         row = cur.fetchone()
         count = row[0] if isinstance(row, (tuple, list)) else list(row.values())[0]
         if count > 0:
-            print(f"[seed] Baza že vsebuje {count} rezervacij — preskačem.")
-            return
+            # Preveri ali je datum zadnjega vnosa danes (isti deploy)
+            cur.execute("SELECT created_at FROM reservations ORDER BY id DESC LIMIT 1")
+            last = cur.fetchone()
+            if last:
+                last_ts = last[0] if isinstance(last, (tuple, list)) else list(last.values())[0]
+                last_date = last_ts[:10] if last_ts else ""
+                today = datetime.now().strftime("%Y-%m-%d")
+                if last_date == today:
+                    print(f"[seed] Demo podatki so že vstavljeni za danes — preskačem.")
+                    return
+            # Izbriši stare demo podatke in vstavi svežih
+            print("[seed] Brišem stare demo podatke in vstavljam sveže...")
+            cur.execute("DELETE FROM reservations")
+            cur.execute("DELETE FROM conversations")
+            cur.execute("DELETE FROM inquiries")
+            conn.commit()
     finally:
         cur.close()
         conn.close()
