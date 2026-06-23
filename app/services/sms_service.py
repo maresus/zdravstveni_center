@@ -39,7 +39,7 @@ SMSAPI_SENDER = os.getenv("SMSAPI_SENDER", "").strip()
 SMS_MOCK_MODE = os.getenv("SMS_MOCK_MODE", "true").lower() in ("true", "1", "yes")
 
 # Clinic info
-CLINIC_NAME = os.getenv("CLINIC_NAME", "Medilab d.o.o.")
+CLINIC_NAME = os.getenv("CLINIC_NAME", "Zdravstveni center d.o.o.")
 CLINIC_PHONE = os.getenv("CLINIC_PHONE", "04 271 30 10")
 
 
@@ -79,7 +79,7 @@ Lokacija: Zdraviliška 12, Ljubljana
 
 Če imate vprašanja, nas kontaktirajte:
 Tel: {phone}
-Email: mr@medilab.si
+Email: info@zc-kranj.si
 """.strip(),
 
     ReminderType.CONFIRMATION: """

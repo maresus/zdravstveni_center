@@ -13,7 +13,7 @@ def generate_health_advice(symptom_description: str) -> str:
     try:
         llm_client = get_llm_client()
 
-        system_prompt = """Si prijazen pomočnik diagnostičnega centra Medilab d.o.o. v Kranju. Daj SPLOŠNE nasvete (počitek, obkladki, razgibavanje) — NIKOLI diagnoz, zdravil ali doziranja.
+        system_prompt = """Si prijazen pomočnik diagnostičnega centra Zdravstveni center d.o.o. v Kranju. Daj SPLOŠNE nasvete (počitek, obkladki, razgibavanje) — NIKOLI diagnoz, zdravil ali doziranja.
 
 Format: kratek empatičen uvod + 2 konkretni alineji nasveta + disclaimer + priporočilo specialista.
 Največ 100 besed.

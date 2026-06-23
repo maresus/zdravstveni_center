@@ -37,8 +37,8 @@ facts:
       - kako pokličem
       - pokličem
     response: |
-      📞 MR/RTG/UZ: **04 271 30 10** | mr@medilab.si
-      📞 Ščitnica: **04 271 30 15** | scitnica@medilab.si
+      📞 MR/RTG/UZ: **04 271 30 10** | info@zc-kranj.si
+      📞 Ščitnica: **04 271 30 15** | scitnica@zc-kranj.si
       📍 Partizanska cesta 12, 4000 Kranj
       🕐 Vsak dan: 07:00–19:00
 
@@ -89,8 +89,8 @@ facts:
         Naročanje je enostavno:
 
         📞 Pokličite **04 271 30 10** (MR/RTG/UZ) ali **04 271 30 15** (ščitnica)
-        📧 Pišite na **mr@medilab.si** ali **scitnica@medilab.si**
-        🌐 Naročite prek spleta: www.medilab.si/narocanje
+        📧 Pišite na **info@zc-kranj.si** ali **scitnica@zc-kranj.si**
+        🌐 Naročite prek spleta: www.zc-kranj.si/narocanje
 
         Za naročanje z napotnico ZZZS: cakalnedobe.ezdrav.si
       - |
@@ -142,7 +142,7 @@ facts:
       - lastnik
       - ustanovitelj
     response: |
-      **Medilab d.o.o.** vodita ustanoviteljici **dr. Maja Kokalj, dr. med., spec. radiolog** in **dr. Andrej Vrečko, dr. med., spec. radiolog**.
+      **Zdravstveni center d.o.o.** vodita ustanoviteljici **dr. Maja Kokalj, dr. med., spec. radiolog** in **dr. Andrej Vrečko, dr. med., spec. radiolog**.
 
       Center je bil ustanovljen leta 2009 z vizijo sodobne in dostopne medicinske diagnostike v Kranju.
 
@@ -178,7 +178,7 @@ facts:
       - opis
       - medilab
     response: |
-      **Medilab d.o.o.** je zasebni diagnostični center v Kranju z več kot 15 let izkušnjami.
+      **Zdravstveni center d.o.o.** je zasebni diagnostični center v Kranju z več kot 15 let izkušnjami.
 
       Ponujamo:
       - 🧲 Magnetnoresonančna tomografija (MR)
@@ -198,7 +198,7 @@ facts:
       - magnetnoresonančna
       - mri
     response: |
-      **MR preiskave** — Medilab d.o.o.
+      **MR preiskave** — Zdravstveni center d.o.o.
 
       Izvajamo:
       - MR glave in vratu
@@ -208,7 +208,7 @@ facts:
       - MR trebuha, medenice, prostate, dojk
       - MR angiografija (žilje)
 
-      📞 Naročanje: **04 271 30 10** | mr@medilab.si
+      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
 
   service_rtg:
     priority: low
@@ -218,12 +218,12 @@ facts:
       - rentgen
       - rentgensko
     response: |
-      **RTG slikanje** — Medilab d.o.o.
+      **RTG slikanje** — Zdravstveni center d.o.o.
 
       Izvajamo RTG slikanje kosti, skletnih struktur, prsnega koša in trebuha.
       Preiskava je hitra (5–10 min) in neboleča.
 
-      📞 Naročanje: **04 271 30 10** | mr@medilab.si
+      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
 
   service_uz:
     priority: low
@@ -234,7 +234,7 @@ facts:
       - ultrazvočni
       - ultrazvočna
     response: |
-      **Ultrazvočna diagnostika (UZ)** — Medilab d.o.o.
+      **Ultrazvočna diagnostika (UZ)** — Zdravstveni center d.o.o.
 
       Izvajamo:
       - UZ trebuha
@@ -245,7 +245,7 @@ facts:
       - UZ žil (Doppler)
 
       UZ preiskave so **izključno samoplačniške**.
-      📞 Naročanje: **04 271 30 10** | mr@medilab.si
+      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
 
   service_scitnica:
     priority: low
@@ -265,7 +265,7 @@ facts:
       - Prekomerno izločanje ščitničnega hormona (hipertiroza)
       - Zmanjšano izločanje ščitničnega hormona (hipotiroza)
 
-      📞 Naročanje: **04 271 30 15** | scitnica@medilab.si
+      📞 Naročanje: **04 271 30 15** | scitnica@zc-kranj.si
 
   zdravstveni_nasvet_splosno:
     priority: medium

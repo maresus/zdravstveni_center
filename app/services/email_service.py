@@ -13,11 +13,11 @@ AKTIVACIJA:
 SMTP NASTAVITVE (.env):
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=mr@medilab.si
+SMTP_USER=info@zc-kranj.si
 SMTP_PASSWORD=your_app_password
-SMTP_FROM_EMAIL=mr@medilab.si
-SMTP_FROM_NAME=Medilab d.o.o.
-ADMIN_EMAIL=mr@medilab.si
+SMTP_FROM_EMAIL=info@zc-kranj.si
+SMTP_FROM_NAME=Zdravstveni center d.o.o.
+ADMIN_EMAIL=info@zc-kranj.si
 """
 
 import os
@@ -39,9 +39,9 @@ SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
 SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
 SMTP_USER = os.getenv("SMTP_USER", "")
 SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
-SMTP_FROM_EMAIL = os.getenv("SMTP_FROM_EMAIL", "mr@medilab.si")
-SMTP_FROM_NAME = os.getenv("SMTP_FROM_NAME", "Medilab d.o.o.")
-ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "mr@medilab.si")
+SMTP_FROM_EMAIL = os.getenv("SMTP_FROM_EMAIL", "info@zc-kranj.si")
+SMTP_FROM_NAME = os.getenv("SMTP_FROM_NAME", "Zdravstveni center d.o.o.")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "info@zc-kranj.si")
 SMTP_SSL = os.getenv("SMTP_SSL", "").strip().lower() in {"1", "true", "yes"}
 RESEND_API_KEY = os.getenv("RESEND_API_KEY", "").strip()
 RESEND_FROM_EMAIL = os.getenv("RESEND_FROM_EMAIL", "onboarding@resend.dev")
@@ -66,13 +66,13 @@ def _email_wrapper(content: str) -> str:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medilab d.o.o.</title>
+    <title>Zdravstveni center d.o.o.</title>
 </head>
 <body style="margin:0; padding:0; background:#faf9f7; font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
     <div style="max-width:620px; margin:0 auto; padding:24px 16px;">
         <!-- Header -->
         <div style="background:{BRAND_COLOR}; color:#fff; padding:18px 24px; border-radius:14px 14px 0 0; font-size:18px; font-weight:700; letter-spacing:.3px;">
-            Medilab d.o.o.
+            Zdravstveni center d.o.o.
         </div>
         
         <!-- Content -->
@@ -82,7 +82,7 @@ def _email_wrapper(content: str) -> str:
         
         <!-- Footer -->
         <div style="background:{BG_COLOR}; border:1px solid {BORDER_COLOR}; border-top:none; border-radius:0 0 14px 14px; padding:16px 24px; color:{MUTED_COLOR}; font-size:12px;">
-            Medilab d.o.o.
+            Zdravstveni center d.o.o.
         </div>
     </div>
 </body>
@@ -154,7 +154,7 @@ def _guest_room_confirmation_html(data: Dict[str, Any]) -> str:
     
     <p style="margin-top:18px; color:{MUTED_COLOR};">
         Rezervacijo bomo potrdili po preverjanju razpoložljivosti.<br>
-        Za spremembe ali preklic nas kontaktirajte na 04 271 30 10 ali mr@medilab.si
+        Za spremembe ali preklic nas kontaktirajte na 04 271 30 10 ali info@zc-kranj.si
     </p>
     """
     return _email_wrapper(content)
@@ -204,7 +204,7 @@ def _guest_table_confirmation_html(data: Dict[str, Any]) -> str:
 
     <p style="margin-top:18px; color:{MUTED_COLOR};">
         V primeru preprečitve nas prosimo obvestite vsaj 24 ur vnaprej.<br>
-        Kontakt: <strong>04 271 30 10</strong> ali <strong>mr@medilab.si</strong>
+        Kontakt: <strong>04 271 30 10</strong> ali <strong>info@zc-kranj.si</strong>
     </p>
     """
     return _email_wrapper(content)
@@ -290,7 +290,7 @@ def _guest_confirmed_html(data: Dict[str, Any]) -> str:
         f'{icon} Vrsta pregleda': service_type,
         '📅 Datum': data.get('date', ''),
         '🕐 Ura': data.get('time', ''),
-        '📍 Lokacija': 'Medilab d.o.o., Partizanska 12, Kranj',
+        '📍 Lokacija': 'Zdravstveni center d.o.o., Partizanska 12, Kranj',
     })}
 
     <div style="background:#f0f9ff;border-left:4px solid #0891b2;padding:12px 16px;margin:20px 0;border-radius:4px;">
@@ -305,7 +305,7 @@ def _guest_confirmed_html(data: Dict[str, Any]) -> str:
     <p style="margin-top:18px;">
         <strong>Za morebitne spremembe ali preklic:</strong><br>
         📞 04 271 30 10<br>
-        ✉️ mr@medilab.si
+        ✉️ info@zc-kranj.si
     </p>
 
     <p style="color:{MUTED_COLOR};font-size:12px;margin-top:24px;">
@@ -336,12 +336,12 @@ def _guest_rejected_html(data: Dict[str, Any]) -> str:
 
     <p style="margin-left:16px;">
         📞 <strong>04 271 30 10</strong><br>
-        ✉️ <strong>mr@medilab.si</strong>
+        ✉️ <strong>info@zc-kranj.si</strong>
     </p>
 
     <p style="margin-top:24px;">
         Lepo vas pozdravljamo,<br>
-        <strong>Medilab d.o.o.</strong>
+        <strong>Zdravstveni center d.o.o.</strong>
     </p>
     """
     return _email_wrapper(content)
@@ -376,7 +376,7 @@ def _guest_reminder_html(data: Dict[str, Any]) -> str:
         f'{icon} Vrsta pregleda': service_type,
         '📅 Datum': data.get('date', ''),
         '🕐 Ura': data.get('time', ''),
-        '📍 Lokacija': 'Medilab d.o.o., Partizanska 12, Kranj',
+        '📍 Lokacija': 'Zdravstveni center d.o.o., Partizanska 12, Kranj',
     })}
 
     <div style="background:#f0f9ff;border-left:4px solid #0891b2;padding:12px 16px;margin:20px 0;border-radius:4px;">
@@ -392,12 +392,12 @@ def _guest_reminder_html(data: Dict[str, Any]) -> str:
         <strong>V primeru preprečitve:</strong><br>
         Prosimo, obvestite nas <strong>čim prej</strong>, da lahko termin dodelimo drugemu pacientu.<br>
         📞 04 271 30 10<br>
-        ✉️ mr@medilab.si
+        ✉️ info@zc-kranj.si
     </p>
 
     <p style="margin-top:24px;">
         Veselimo se vašega obiska!<br>
-        <strong>Medilab d.o.o.</strong>
+        <strong>Zdravstveni center d.o.o.</strong>
     </p>
     """
     return _email_wrapper(content)
@@ -561,19 +561,19 @@ def _generate_ical(data: Dict[str, Any]) -> str:
     dtstart = dt_start.strftime('%Y%m%dT%H%M%S')
     dtend = dt_end.strftime('%Y%m%dT%H%M%S')
     dtstamp = datetime.now().strftime('%Y%m%dT%H%M%SZ')
-    uid = f"{data.get('id', uuid.uuid4())}@medilab.si"
+    uid = f"{data.get('id', uuid.uuid4())}@zc-kranj.si"
 
     ical = f"""BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Medilab//SI
+PRODID:-//Zdravstveni center//SI
 BEGIN:VEVENT
 UID:{uid}
 DTSTAMP:{dtstamp}
 DTSTART:{dtstart}
 DTEND:{dtend}
 SUMMARY:{service_type}
-DESCRIPTION:Termin pri Medilab d.o.o.\\n\\nPacient: {data.get('name', '')}\\nVrsta: {service_type}
-LOCATION:Medilab d.o.o., Partizanska 12, Kranj
+DESCRIPTION:Termin pri Zdravstveni center d.o.o.\\n\\nPacient: {data.get('name', '')}\\nVrsta: {service_type}
+LOCATION:Zdravstveni center d.o.o., Partizanska 12, Kranj
 STATUS:CONFIRMED
 SEQUENCE:0
 BEGIN:VALARM

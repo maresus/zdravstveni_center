@@ -2,7 +2,7 @@
 <html lang="sl">
 <head>
   <meta charset="UTF-8" />
-  <title>Medilab – Digitalni pomočnik</title>
+  <title>Zdravstveni center – Digitalni pomočnik</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -172,7 +172,7 @@
       <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     </button>
   </div>
-  <div class="powered">Medilab d.o.o. · Partizanska cesta 12, Kranj · 04 271 30 10</div>
+  <div class="powered">Zdravstveni center d.o.o. · Partizanska cesta 12, Kranj · 04 271 30 10</div>
 </div>
 
 <!-- BOOKING OVERLAY -->
@@ -287,7 +287,7 @@
                 <button class="q-btn no" onclick="answerQ('nosecnost','ne')">Ne</button>
               </div>
             </div>
-            <p style="font-size:0.75rem;color:var(--muted);margin-top:4px;">Vaše odgovore posredujemo Medilab ekipi pred preiskavo.</p>
+            <p style="font-size:0.75rem;color:var(--muted);margin-top:4px;">Vaše odgovore posredujemo Zdravstveni center ekipi pred preiskavo.</p>
           </div>
         </div>
 
@@ -315,7 +315,7 @@
       <div class="form-success" id="formSuccess">
         <div class="s-icon">✅</div>
         <h3>Naročilo prejeto!</h3>
-        <p>Hvala za naročilo. Ekipa Medilab vas bo kontaktirala za potrditev termina.<br><br>Potrditveni email z navodili za pripravo preiskave boste prejeli na vaš email naslov.</p>
+        <p>Hvala za naročilo. Ekipa Zdravstveni center vas bo kontaktirala za potrditev termina.<br><br>Potrditveni email z navodili za pripravo preiskave boste prejeli na vaš email naslov.</p>
         <p style="margin-top:16px;font-size:0.78rem;color:var(--muted);">Vprašanja? Pokličite: <strong>04 271 30 10</strong></p>
       </div>
     </div>
@@ -403,7 +403,7 @@
     document.getElementById('formSuccess').style.display = 'block';
     const mrNote = isMR(service) && Object.keys(mrAnswers).length ? '\nMR vprašalnik izpolnjen.' : '';
     addMessageToDOM(`Naročilo oddano: ${service}\n${name} · ${phone} · ${email}${mrNote}`, 'user');
-    addMessageToDOM('Hvala za naročilo! Ekipa Medilab vas bo kontaktirala za potrditev termina.\n\nPotrditveni email z navodili za pripravo preiskave boste prejeli na vaš email naslov.', 'bot');
+    addMessageToDOM('Hvala za naročilo! Ekipa Zdravstveni center vas bo kontaktirala za potrditev termina.\n\nPotrditveni email z navodili za pripravo preiskave boste prejeli na vaš email naslov.', 'bot');
     setTimeout(() => { closeSheet(); resetBookingForm(); }, 4000);
   }
 
@@ -520,7 +520,7 @@
     sessionId = (crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Date.now());
     localStorage.setItem(SESSION_KEY, sessionId);
     messagesEl.innerHTML = ''; quickBtns.style.display = 'flex';
-    addMessageToDOM('Pozdravljeni pri Medilab!\n\nSem vaš digitalni pomočnik. Pomagam vam z informacijami o preiskavah ter naročanjem na samoplačniške storitve.\n\nKako vam lahko pomagam?', 'bot', false);
+    addMessageToDOM('Pozdravljeni pri Zdravstveni center!\n\nSem vaš digitalni pomočnik. Pomagam vam z informacijami o preiskavah ter naročanjem na samoplačniške storitve.\n\nKako vam lahko pomagam?', 'bot', false);
   });
 
   sendBtn.addEventListener('click', () => sendMessage(inputEl.value));
@@ -529,7 +529,7 @@
   document.querySelectorAll('.quick-btn').forEach(btn => btn.addEventListener('click', () => sendMessage(btn.dataset.msg)));
 
   if (!loadHistory()) {
-    addMessageToDOM('Pozdravljeni pri Medilab!\n\nSem vaš digitalni pomočnik. Pomagam vam z informacijami o preiskavah ter naročanjem na samoplačniške storitve.\n\nKako vam lahko pomagam?', 'bot', false);
+    addMessageToDOM('Pozdravljeni pri Zdravstveni center!\n\nSem vaš digitalni pomočnik. Pomagam vam z informacijami o preiskavah ter naročanjem na samoplačniške storitve.\n\nKako vam lahko pomagam?', 'bot', false);
   }
 </script>
 </body>

@@ -1,8 +1,8 @@
 clinic:
-  name: "Medilab d.o.o."
+  name: "Zdravstveni center d.o.o."
   address: "Partizanska cesta 12, 4000 Kranj"
   phone: "04 271 30 10"
-  email: "mr@medilab.si"
+  email: "info@zc-kranj.si"
   hours:
     weekdays: "07:00 - 19:00"
     saturday: "07:00 - 09:00 (samoplačniške storitve)"

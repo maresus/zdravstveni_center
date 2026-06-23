@@ -1,10 +1,10 @@
 clinic_id: "lj_center"
 contact:
-  name: "Medilab d.o.o."
-  email: "mr@medilab.si"
+  name: "Zdravstveni center d.o.o."
+  email: "info@zc-kranj.si"
   phone: "04 271 30 10"
   phone_scitnica: "04 271 30 15"
-  email_scitnica: "scitnica@medilab.si"
+  email_scitnica: "scitnica@zc-kranj.si"
   address: "Partizanska cesta 12, 4000 Kranj"
   director: "dr. Maja Kokalj, dr. med., spec. radiolog"
   parking: "Brezplačno parkirišče neposredno ob objektu (30 mest)"
@@ -93,7 +93,7 @@ unsupported_symptoms:
 
         Za nujno medicinsko pomoč prosim pokličite **112** ali obiščite najbližji urgentni center.
 
-        Medilab d.o.o. je diagnostični center — za naročanje na preiskave smo dosegljivi na **04 271 30 10** vsak dan od 07:00 do 18:00.
+        Zdravstveni center d.o.o. je diagnostični center — za naročanje na preiskave smo dosegljivi na **04 271 30 10** vsak dan od 07:00 do 18:00.
     quick_replies:
       - label: "Naroči se na preiskavo"
         value: "DA"
@@ -104,7 +104,7 @@ unsupported_symptoms:
       - "splošni zdravnik"
       - "osebni zdravnik"
       - "zdravstveni dom"
-    response: "Medilab d.o.o. je zasebni diagnostični center — ne nudimo splošne medicine. Za splošnega zdravnika se obrnite na Zdravstveni dom Kranj. Lahko vam pa pomagam z naročanjem na MR, RTG ali UZ preiskavo. Kaj potrebujete?"
+    response: "Zdravstveni center d.o.o. je zasebni diagnostični center — ne nudimo splošne medicine. Za splošnega zdravnika se obrnite na Zdravstveni dom Kranj. Lahko vam pa pomagam z naročanjem na MR, RTG ali UZ preiskavo. Kaj potrebujete?"
     ui_override:
       type: "quick_replies"
       data:
@@ -116,14 +116,14 @@ info_responses:
   pozdrav: |
     Pozdravljeni!
 
-    Sem vaš digitalni pomočnik Medilab d.o.o. diagnostičnega centra. Kako vam lahko pomagam?
+    Sem vaš digitalni pomočnik Zdravstveni center d.o.o. diagnostičnega centra. Kako vam lahko pomagam?
 
     Pomagam z informacijami o preiskavah (MR, RTG, UZ), čakalnih dobah, naročanjem ter ambulanto za bolezni ščitnice.
   kdo_si: |
-    Sem digitalni pomočnik Medilab d.o.o. diagnostičnega centra v Kranju.
+    Sem digitalni pomočnik Zdravstveni center d.o.o. diagnostičnega centra v Kranju.
 
     Z veseljem odgovorim na vprašanja o naših preiskavah (MR, RTG, UZ), čakalnih dobah in naročanju.
-  splosno: "Sem virtualni asistent diagnostičnega centra Medilab. Pomagam pri naročanju in informacijah o preiskavah MR, RTG, UZ in ambulanti za bolezni ščitnice."
+  splosno: "Sem virtualni asistent zdravstvenega centra d.o.o.. Pomagam pri naročanju in informacijah o preiskavah MR, RTG, UZ in ambulanti za bolezni ščitnice."
   ekipa: |
     Naša strokovna ekipa:
 
@@ -132,11 +132,11 @@ info_responses:
     🩺 **dr. Lea Bartol**, dr. med., spec. radiolog — radiologija trebušnih organov
     🩺 **dr. Klavdija Oblak**, dr. med., spec. internist — ambulanta za bolezni ščitnice
 
-    Za termini ali vprašanja: 04 271 30 10 | mr@medilab.si
+    Za termini ali vprašanja: 04 271 30 10 | info@zc-kranj.si
   hvala: "Hvala za zaupanje! Če boste še kaj potrebovali, sem tukaj za vas."
   pozdrav_variants:
     - "Živjo! Kako vam lahko danes pomagam?"
-    - "Dober dan! Sem vaš digitalni asistent diagnostičnega centra Medilab. Kako lahko pomagam?"
+    - "Dober dan! Sem vaš digitalni asistent zdravstvenega centra d.o.o.. Kako lahko pomagam?"
   storitve_variants:
     - "Nudimo MR preiskave, RTG slikanje, UZ diagnostiko, UZ vodene posege in ambulanto za bolezni ščitnice. Kaj vas zanima?"
     - "Ponujamo: MR, RTG, UZ (samoplačniško), UZ vodene posege in tireološko ambulanto. Povejte, kaj iščete."
@@ -146,6 +146,6 @@ info_responses:
   delovni_cas_variants:
     - "Delovni čas: vsak dan 07:00–19:00. Samoplačniške storitve: vsak dan 07:00–08:00 in 18:00–19:00, ob sobotah 07:00–09:00."
   kontakt_variants:
-    - "MR/RTG/UZ: 04 271 30 10 | mr@medilab.si. Ščitnica: 04 271 30 15 | scitnica@medilab.si. Naslov: Partizanska 12, Kranj."
+    - "MR/RTG/UZ: 04 271 30 10 | info@zc-kranj.si. Ščitnica: 04 271 30 15 | scitnica@zc-kranj.si. Naslov: Partizanska 12, Kranj."
   hvala_variants:
     - "Hvala! Če boste še kaj potrebovali, sem tukaj."
