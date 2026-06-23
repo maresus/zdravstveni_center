@@ -16,6 +16,14 @@ from app.services.reminder_scheduler import start_reminder_scheduler, stop_remin
 # Naloži .env v okolje ob zagonu (za SMTP ipd.)
 load_dotenv()
 
+# Demo seeder — vstavi fake podatke če je baza prazna
+try:
+    from demo_seed import seed_demo
+    from app.services.reservation_service import ReservationService as _RS
+    seed_demo(_RS())
+except Exception as _seed_err:
+    print(f"[seed] Preskočen: {_seed_err}")
+
 settings = Settings()
 app = FastAPI(title=settings.project_name)
 
