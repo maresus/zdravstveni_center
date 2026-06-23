@@ -14,6 +14,17 @@ from app.services.fallback_pipeline import (
 )
 from app.services.routing.ood_policy import check_ood as ood_check
 
+_PURE_GREETINGS = {
+    "zdravo", "zdravjo", "zdwavo", "živjo", "zivjo", "pozdravljeni",
+    "dober dan", "dobro jutro", "hello", "hej", "halo", "bok", "ej",
+    "hi", "hey",
+}
+
+
+def _is_pure_greeting(text: str) -> bool:
+    t = text.lower().strip().rstrip("!.,?")
+    return t in _PURE_GREETINGS
+
 
 def process_chat_turn(*, request: ChatRequest, state: dict[str, Any], deps: Any) -> ChatResponse:
     raw_message = request.message.strip()
@@ -37,6 +48,16 @@ def process_chat_turn(*, request: ChatRequest, state: dict[str, Any], deps: Any)
                 deps.get_response("general.empty_message", clinic_id=clinic_id),
                 state_manager=state_mgr,
                 metadata={"contract_version": "v0.1", "router": "unified_only"},
+            )
+            return ChatResponse(reply=payload["text"], session_id=raw_session_id, metadata=payload["metadata"])
+
+        # Short-circuit pure greetings before fast_pass / RAG to avoid doctor-list response
+        if _is_pure_greeting(raw_message):
+            greeting_text = deps.get_response("general.greeting", clinic_id=clinic_id)
+            payload = deps.format_response(
+                greeting_text,
+                state_manager=state_mgr,
+                metadata={"contract_version": "v0.1", "router": "greeting_guard"},
             )
             return ChatResponse(reply=payload["text"], session_id=raw_session_id, metadata=payload["metadata"])
 
