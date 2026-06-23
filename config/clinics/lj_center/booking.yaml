@@ -2,13 +2,12 @@ version: 1
 flow:
   service:
     prompt: |
-      Na kateri pregled se želite naročiti?
-      - Dermatolog
-      - Ortoped
-      - Okulist
-      - Laserski poseg
-      - Estetski poseg
-      - Kozmetika
+      Na katero preiskavo se želite naročiti?
+      - MR preiskava
+      - RTG slikanje
+      - Ultrazvok (UZ)
+      - UZ vodeni poseg
+      - Ambulanta za bolezni ščitnice
 
   date:
     prompt: |
