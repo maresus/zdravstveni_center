@@ -53,6 +53,10 @@ facts:
       - kdaj ste odprti
       - kdaj delate
       - urnik
+      - ob sobotah
+      - sobota
+      - vikend
+      - kdaj ste
     response:
       - |
         Delamo **vsak dan od 07:00 do 19:00**.
@@ -62,7 +66,7 @@ facts:
         Samoplačniške preiskave v razširjenem urniku: 07:00–08:00 in 18:00–19:00 ter sobote 07:00–09:00.
 
   parkiranje:
-    priority: medium
+    priority: fast
     category: PARKIRANJE_INFO
     keywords:
       - parking
@@ -72,7 +76,7 @@ facts:
       - kje parkiram
     response: |
       Parkiranje je **brezplačno** za vse naše paciente.
-      Parkirišče s 30 mesti (vključno s parkirnimi mesti za invalide) se nahaja neposredno pred vhodom.
+      Parkirišče s 30 mesti (vključno s parkirnimi mesti za invalide) se nahaja neposredno pred vhodom na **Partizanski cesti 12, Kranj**.
 
   postopek_narocanja:
     priority: fast
@@ -96,7 +100,8 @@ facts:
       - |
         Kliknite **📅 Naroči se** v spodnjem delu pogovora.
 
-        Potrebujemo vaše ime, telefon in vrsto preiskave — kontaktirali vas bomo za potrditev.
+        Potrebujemo vaše ime, telefon in vrsto preiskave — pokličemo vas za potrditev termina.
+        📞 Direktno: **04 271 30 10**
 
   cene:
     priority: fast
@@ -164,7 +169,7 @@ facts:
       Za informacije o ekipi pokličite **04 271 30 10** ali pišite na info@zc-kranj.si.
 
   o_centru:
-    priority: medium
+    priority: fast
     category: PODJETJE_INFO
     keywords:
       - o vas
@@ -173,7 +178,6 @@ facts:
       - kdo ste
       - kaj ponujate
       - opis
-      - medilab
     response: |
       **Zdravstveni center d.o.o.** je zasebni diagnostični center v Kranju z več kot 15 let izkušnjami.
 
@@ -187,15 +191,29 @@ facts:
       📍 Partizanska 12, Kranj | 📞 04 271 30 10
 
   service_mr:
-    priority: low
+    priority: fast
     category: STORITVE_INFO
     keywords:
       - mr preiskava
       - magnetna resonanca
       - magnetnoresonančna
       - mri
+      - mr glave
+      - mr hrbtenice
+      - mr sklepov
+      - mr kolena
+      - mr gleženja
+      - mr rame
+      - mr trebuha
+      - mr prostate
+      - mr dojk
+      - mr medenice
+      - mr angiografija
+      - mr artrografija
+      - mr enterografija
+      - mr urografija
     response: |
-      **MR preiskave** — Zdravstveni center d.o.o.
+      🧲 **MR preiskave** — Zdravstveni center d.o.o.
 
       Izvajamo:
       - MR glave in vratu
@@ -205,33 +223,93 @@ facts:
       - MR trebuha, medenice, prostate, dojk
       - MR angiografija (žilje)
 
+      Preiskava traja **15–45 minut** (odvisno od pregledovanega dela).
+      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
+
+  mr_trajanje:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - kako dolgo traja mr
+      - koliko časa traja mr
+      - koliko casa traja mr
+      - kako dolgo sem v aparatu
+      - mr preiskava trajanje
+      - trajanje mr
+      - koliko traja mr
+      - kako dolgo mr
+    response: |
+      ⏱️ **Trajanje MR preiskave:**
+
+      - MR glave ali vratu: ~30 minut
+      - MR hrbtenice: ~15–30 minut
+      - MR sklepov (koleno, rama, gleženj): ~15–30 minut
+      - MR trebuha / prostate / medenice: ~45 minut
+      - MR dojk: ~30–40 minut
+      - S kontrastnim sredstvom: +15 minut
+
+      **Pridite vsaj 10 minut pred terminom.**
+      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
+
+  mr_priprava:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - priprava na mr
+      - priprava pred mr
+      - kako se pripravim na mr
+      - navodila za mr
+      - kaj prinesti na mr
+      - kaj moram vedeti pred mr
+      - priprava mr preiskava
+      - pred mr preiskavo
+      - kako poteka mr
+    response: |
+      📋 **Priprava pred MR preiskavo:**
+
+      ✅ **Izpolnite splošni vprašalnik za MR** (na voljo na www.zc-kranj.si) — prinesite ga s seboj.
+      ✅ Odstranite vse kovinske predmete: nakit, ure, pasove, ključe, bančne kartice, mobilni telefon.
+      ✅ **MR trebuha, dojk, prostate, medenice:** bodite tešči vsaj 6 ur.
+      ✅ **MR glave, hrbtenice, sklepov:** posebna prehranjevalna priprava ni potrebna.
+
+      ⚠️ Sporočite, če imate srčni spodbujevalnik, kovinske vsadke ali klavstrofobijo.
+
+      Preiskava je neboleča. Med slikanjem bo slišen glasen ropot — dobite slušalke.
       📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
 
   service_rtg:
-    priority: low
+    priority: fast
     category: STORITVE_INFO
     keywords:
-      - rtg
-      - rentgen
-      - rentgensko
+      - rtg slikanje
+      - rentgensko slikanje
+      - rentgen kosti
+      - rentgen prsnega kosa
+      - rtg preiskava
     response: |
-      **RTG slikanje** — Zdravstveni center d.o.o.
+      ☢️ **RTG slikanje** — Zdravstveni center d.o.o.
 
-      Izvajamo RTG slikanje kosti, skletnih struktur, prsnega koša in trebuha.
-      Preiskava je hitra (5–10 min) in neboleča.
+      Izvajamo RTG slikanje kosti, skeletnih struktur, prsnega koša in trebuha.
+      Preiskava je hitra (**5–10 minut**) in neboleča. Posebna priprava ni potrebna.
 
       📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
 
   service_uz:
-    priority: low
+    priority: fast
     category: STORITVE_INFO
     keywords:
-      - uz
       - ultrazvok
-      - ultrazvočni
-      - ultrazvočna
+      - ultrazvočna diagnostika
+      - ultrazvočni pregled
+      - uz preiskava
+      - uz trebuha
+      - uz ščitnice
+      - uz dojk
+      - uz sečil
+      - uz žil
+      - doppler
     response: |
-      **Ultrazvočna diagnostika (UZ)** — Zdravstveni center d.o.o.
+      🔊 **Ultrazvočna diagnostika (UZ)** — Zdravstveni center d.o.o.
 
       Izvajamo:
       - UZ trebuha
@@ -241,7 +319,7 @@ facts:
       - UZ sklepov in mehkih tkiv
       - UZ žil (Doppler)
 
-      UZ preiskave so **izključno samoplačniške**.
+      UZ preiskave so **izključno samoplačniške** (brez napotnice).
       📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
 
   service_scitnica:
@@ -279,11 +357,12 @@ facts:
       - samoplačniško
       - samoplačniski
       - samoplačnik
-      - zasebno
+      - zasebno plačam
       - brez napotice
       - zzzs
       - napotnica
       - z napotnico
+      - ali potrebujem napotnico
     response: |
       **Napotnica ZZZS ali samoplačniško?**
 
