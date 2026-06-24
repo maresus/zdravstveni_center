@@ -57,6 +57,9 @@ facts:
       - sobota
       - vikend
       - kdaj ste
+      - opening hours
+      - what time
+      - when are you open
     response:
       - |
         Delamo **vsak dan od 07:00 do 19:00**.
@@ -174,10 +177,11 @@ facts:
     keywords:
       - o vas
       - o centru
-      - kaj ste
+      - kaj ste vi
       - kdo ste
       - kaj ponujate
       - opis
+      - opišite
     response: |
       **Zdravstveni center d.o.o.** je zasebni diagnostični center v Kranju z več kot 15 let izkušnjami.
 
@@ -189,6 +193,56 @@ facts:
       - 🩺 Ambulanta za bolezni ščitnice
 
       📍 Partizanska 12, Kranj | 📞 04 271 30 10
+
+  # MR priprava MORA biti pred service_mr, sicer "mr preiskava" ubije "priprava na mr preiskavo"
+  mr_priprava:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - priprava na mr
+      - priprava pred mr
+      - kako se pripravim na mr
+      - navodila za mr
+      - kaj prinesti na mr
+      - kaj moram vedeti pred mr
+      - pred mr preiskavo
+      - kako poteka mr preiskava
+    response: |
+      Pred MR preiskavo:
+
+      Odstranite vse kovinske predmete (nakit, ure, pasove, ključe, bančne kartice, mobilni telefon).
+      Izpolnite splošni vprašalnik za MR — prinesite ga s seboj (www.zc-kranj.si).
+      MR trebuha / dojk / prostate / medenice: bodite tešči vsaj 6 ur.
+      MR glave / hrbtenice / sklepov: posebna prehranjevalna priprava ni potrebna.
+
+      Sporočite, če imate srčni spodbujevalnik, kovinske vsadke ali klavstrofobijo.
+      Preiskava je neboleča. Med slikanjem bo slišen glasen ropot — dobite slušalke.
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
+
+  mr_trajanje:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - kako dolgo traja mr
+      - koliko časa traja mr
+      - koliko casa traja mr
+      - kako dolgo sem v aparatu
+      - mr preiskava trajanje
+      - trajanje mr
+      - koliko traja mr
+      - kako dolgo mr
+    response: |
+      Trajanje MR preiskave:
+
+      MR glave ali vratu: okoli 30 minut
+      MR hrbtenice: 15 do 30 minut
+      MR sklepov (koleno, rama, gleženj): 15 do 30 minut
+      MR trebuha / prostate / medenice: okoli 45 minut
+      MR dojk: 30 do 40 minut
+      S kontrastnim sredstvom: dodatnih 15 minut
+
+      Pridite vsaj 10 minut pred terminom.
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
   service_mr:
     priority: fast
@@ -213,69 +267,18 @@ facts:
       - mr enterografija
       - mr urografija
     response: |
-      🧲 **MR preiskave** — Zdravstveni center d.o.o.
+      MR preiskave — Zdravstveni center d.o.o.
 
       Izvajamo:
-      - MR glave in vratu
-      - MR hrbtenice (vratna, prsna, ledvena)
-      - MR sklepov (rama, koleno, gleženj, kolk, zapestje)
-      - MR artrografija
-      - MR trebuha, medenice, prostate, dojk
-      - MR angiografija (žilje)
+      MR glave in vratu
+      MR hrbtenice (vratna, prsna, ledvena)
+      MR sklepov (rama, koleno, gleženj, kolk, zapestje)
+      MR artrografija
+      MR trebuha, medenice, prostate, dojk
+      MR angiografija (žilje)
 
-      Preiskava traja **15–45 minut** (odvisno od pregledovanega dela).
-      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
-
-  mr_trajanje:
-    priority: fast
-    category: STORITVE_INFO
-    keywords:
-      - kako dolgo traja mr
-      - koliko časa traja mr
-      - koliko casa traja mr
-      - kako dolgo sem v aparatu
-      - mr preiskava trajanje
-      - trajanje mr
-      - koliko traja mr
-      - kako dolgo mr
-    response: |
-      ⏱️ **Trajanje MR preiskave:**
-
-      - MR glave ali vratu: ~30 minut
-      - MR hrbtenice: ~15–30 minut
-      - MR sklepov (koleno, rama, gleženj): ~15–30 minut
-      - MR trebuha / prostate / medenice: ~45 minut
-      - MR dojk: ~30–40 minut
-      - S kontrastnim sredstvom: +15 minut
-
-      **Pridite vsaj 10 minut pred terminom.**
-      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
-
-  mr_priprava:
-    priority: fast
-    category: STORITVE_INFO
-    keywords:
-      - priprava na mr
-      - priprava pred mr
-      - kako se pripravim na mr
-      - navodila za mr
-      - kaj prinesti na mr
-      - kaj moram vedeti pred mr
-      - priprava mr preiskava
-      - pred mr preiskavo
-      - kako poteka mr
-    response: |
-      📋 **Priprava pred MR preiskavo:**
-
-      ✅ **Izpolnite splošni vprašalnik za MR** (na voljo na www.zc-kranj.si) — prinesite ga s seboj.
-      ✅ Odstranite vse kovinske predmete: nakit, ure, pasove, ključe, bančne kartice, mobilni telefon.
-      ✅ **MR trebuha, dojk, prostate, medenice:** bodite tešči vsaj 6 ur.
-      ✅ **MR glave, hrbtenice, sklepov:** posebna prehranjevalna priprava ni potrebna.
-
-      ⚠️ Sporočite, če imate srčni spodbujevalnik, kovinske vsadke ali klavstrofobijo.
-
-      Preiskava je neboleča. Med slikanjem bo slišen glasen ropot — dobite slušalke.
-      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
+      Preiskava traja 15 do 45 minut (odvisno od pregledovanega dela).
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
   service_rtg:
     priority: fast
@@ -284,44 +287,16 @@ facts:
       - rtg slikanje
       - rentgensko slikanje
       - rentgen kosti
-      - rentgen prsnega kosa
       - rtg preiskava
     response: |
-      ☢️ **RTG slikanje** — Zdravstveni center d.o.o.
+      RTG slikanje — Zdravstveni center d.o.o.
 
-      Izvajamo RTG slikanje kosti, skeletnih struktur, prsnega koša in trebuha.
-      Preiskava je hitra (**5–10 minut**) in neboleča. Posebna priprava ni potrebna.
+      Izvajamo RTG slikanje kosti, skeletnih struktur, prsnega kosa in trebuha.
+      Preiskava je hitra (5 do 10 minut) in neboleča. Posebna priprava ni potrebna.
 
-      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
-  service_uz:
-    priority: fast
-    category: STORITVE_INFO
-    keywords:
-      - ultrazvok
-      - ultrazvočna diagnostika
-      - ultrazvočni pregled
-      - uz preiskava
-      - uz trebuha
-      - uz ščitnice
-      - uz dojk
-      - uz sečil
-      - uz žil
-      - doppler
-    response: |
-      🔊 **Ultrazvočna diagnostika (UZ)** — Zdravstveni center d.o.o.
-
-      Izvajamo:
-      - UZ trebuha
-      - UZ sečil in medenice
-      - UZ ščitnice
-      - UZ dojk
-      - UZ sklepov in mehkih tkiv
-      - UZ žil (Doppler)
-
-      UZ preiskave so **izključno samoplačniške** (brez napotnice).
-      📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
-
+  # service_scitnica MORA biti pred service_uz
   service_scitnica:
     priority: fast
     category: STORITVE_INFO
@@ -338,16 +313,38 @@ facts:
       - tireolog
       - golša
     response: |
-      🩺 **Ambulanta za bolezni ščitnice** — Zdravstveni center d.o.o.
+      Ambulanta za bolezni ščitnice — Zdravstveni center d.o.o.
 
       Zdravimo:
-      - Difuzno povečano in vozličasto žlezo (golša)
-      - Prekomerno izločanje ščitničnih hormonov (hipertiroidizem)
-      - Zmanjšano izločanje ščitničnih hormonov (hipotiroidizem)
-      - Vozliče in ciste ščitnice
+      Difuzno povečano in vozličasto žlezo (golša)
+      Prekomerno izločanje ščitničnih hormonov (hipertiroidizem)
+      Zmanjšano izločanje ščitničnih hormonov (hipotiroidizem)
+      Vozliče in ciste ščitnice
 
-      📞 Naročanje: **04 271 30 15** | scitnica@zc-kranj.si
-      🕐 Ordinacijski čas: pon–pet 08:00–16:00
+      Narocanje: 04 271 30 15 ali scitnica@zc-kranj.si
+      Ordinacijski čas: pon do pet 08:00 do 16:00
+
+  service_uz:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - ultrazvok
+      - ultrazvočna diagnostika
+      - ultrazvočni pregled
+      - uz preiskava
+    response: |
+      Ultrazvočna diagnostika (UZ) — Zdravstveni center d.o.o.
+
+      Izvajamo:
+      UZ trebuha
+      UZ sečil in medenice
+      UZ ščitnice
+      UZ dojk
+      UZ sklepov in mehkih tkiv
+      UZ žil (Doppler)
+
+      UZ preiskave so izključno samoplačniške (brez napotnice).
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
   napotnica:
     priority: fast
@@ -364,14 +361,14 @@ facts:
       - z napotnico
       - ali potrebujem napotnico
     response: |
-      **Napotnica ZZZS ali samoplačniško?**
+      Napotnica ZZZS ali samoplačniško?
 
-      ✅ **Z napotnico ZZZS** — preiskava je brezplačna za zavarovance (pokrita z obveznim zdravstvenim zavarovanjem).
-      💳 **Samoplačniško (brez napotnice)** — plačate po veljavnem ceniku:
-         🧲 MR: 180–320 € | ☢️ RTG: 35–75 € | 🔊 UZ: 65–120 €
+      Z napotnico ZZZS: preiskava je brezplačna za zavarovance (pokrita z obveznim zdravstvenim zavarovanjem).
+      Samoplačniško (brez napotnice): plačate po veljavnem ceniku:
+      MR: 180 do 320 EUR, RTG: 35 do 75 EUR, UZ: 65 do 120 EUR
 
-      Za samoplačniške preiskave napotnica ni potrebna — naročite se neposredno.
-      📞 **04 271 30 10** | info@zc-kranj.si
+      Za samoplačniške preiskave napotnica ni potrebna — narocite se neposredno.
+      Tel: 04 271 30 10 ali info@zc-kranj.si
 
   zdravstveni_nasvet_splosno:
     priority: medium
@@ -384,4 +381,4 @@ facts:
     response: |
       Z veseljem vas usmerim k pravi preiskavi ali specialistu.
 
-      ⚠️ *Napomnik: nasveti, ki jih dajem, niso zdravniški nasvet ali diagnoza. Za natančno oceno vašega stanja vedno obiščite zdravnika.*
+      Napomnik: nasveti, ki jih dajem, niso zdravniški nasvet ali diagnoza. Za natančno oceno vašega stanja vedno obiščite zdravnika.
