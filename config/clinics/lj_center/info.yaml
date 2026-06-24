@@ -113,22 +113,26 @@ facts:
       - cena uz
     response:
       - |
-        Cene preiskav:
-        - **MR**: po napotnici ZZZS (zavarovanci) ali samoplačniško
-        - **RTG**: po napotnici ZZZS ali samoplačniško
-        - **UZ diagnostika**: izključno samoplačniško
-        - **UZ vodeni posegi**: izključno samoplačniško
-        - **Ambulanta ščitnice**: po napotnici ZZZS ali samoplačniško
+        Okvirne cene samoplačniških preiskav:
 
-        Za točne cene samoplačniških storitev pokličite **04 271 30 10**.
+        🧲 **MR** — od 180 € do 320 € (odvisno od regije)
+        ☢️ **RTG** — od 35 € do 75 €
+        🔊 **UZ diagnostika** — od 65 € do 120 €
+        💉 **UZ vodeni posegi** — od 150 € do 280 €
+        🩺 **Ambulanta ščitnice** — od 80 € do 150 €
+
+        Zavarovanci z napotnico ZZZS — brez doplačila.
+        Za točen cenik pokličite **04 271 30 10**.
       - |
-        Cenik:
-        🧲 MR — po napotnici ZZZS ali samoplačniško
-        ☢️ RTG — po napotnici ZZZS ali samoplačniško
-        🔊 UZ preiskave — samoplačniško
-        🩺 Ščitnica — po napotnici ZZZS ali samoplačniško
+        Okvirni cenik (samoplačniško):
 
-        Za točne samoplačniške cene: 04 271 30 10
+        🧲 MR glave/hrbtenice/kolena — ~180–320 €
+        ☢️ RTG (en predel) — ~35–75 €
+        🔊 UZ trebuha/dojk/ščitnice — ~65–120 €
+        💉 UZ vodeni poseg — ~150–280 €
+
+        Z napotnico ZZZS: brez doplačila za zavarovance.
+        Točen cenik: **04 271 30 10** ali info@zc-kranj.si
 
   vodstvo:
     priority: fast
@@ -142,29 +146,22 @@ facts:
       - lastnik
       - ustanovitelj
     response: |
-      **Zdravstveni center d.o.o.** vodita ustanoviteljici **dr. Maja Kokalj, dr. med., spec. radiolog** in **dr. Andrej Vrečko, dr. med., spec. radiolog**.
+      **Zdravstveni center d.o.o.** sta leta 2009 v Kranju ustanovila dva radiologa z vizijo sodobne in dostopne medicinske diagnostike.
 
-      Center je bil ustanovljen leta 2009 z vizijo sodobne in dostopne medicinske diagnostike v Kranju.
+      Za informacije pokličite **04 271 30 10** ali pišite na info@zc-kranj.si.
 
   ekipa:
     priority: fast
     category: PODJETJE_INFO
     keywords:
       - ekipa
-      - zdravniki
-      - kdo dela
+      - zdravniki pri vas
+      - kdo dela pri vas
       - tim
-      - kdo je pri vas
-      - kakšna je ekipa
-      - radiolog
     response: |
-      Naša strokovna ekipa:
+      Zdravstveni center d.o.o. zaposluje izkušene radiologe, interniste in diplomirane zdravstvenike s specialistično izobrazbo.
 
-      🩺 **dr. Maja Kokalj** — radiolog, nevroradiologija
-      🩺 **dr. Andrej Vrečko** — radiolog, kostnomišični sistem
-      🩺 **dr. Lea Bartol** — radiolog, trebušni organi
-      🩺 **dr. Klavdija Oblak** — internist, ambulanta za bolezni ščitnice
-      👨‍⚕️ **Miha Peternelj** — dipl. zdravstvenik, laboratorij
+      Za informacije o ekipi pokličite **04 271 30 10** ali pišite na info@zc-kranj.si.
 
   o_centru:
     priority: medium
@@ -248,24 +245,54 @@ facts:
       📞 Naročanje: **04 271 30 10** | info@zc-kranj.si
 
   service_scitnica:
-    priority: low
+    priority: fast
     category: STORITVE_INFO
     keywords:
       - ščitnica
       - scitnica
-      - golša
+      - ambulanta ščitnice
+      - bolezni ščitnice
+      - hipertiroidizem
+      - hipotiroidizem
       - hipotiroza
       - hipertiroza
       - ščitnična
+      - tireolog
+      - golša
     response: |
-      **Ambulanta za bolezni ščitnice** — dr. Klavdija Oblak
+      🩺 **Ambulanta za bolezni ščitnice** — Zdravstveni center d.o.o.
 
       Zdravimo:
       - Difuzno povečano in vozličasto žlezo (golša)
-      - Prekomerno izločanje ščitničnega hormona (hipertiroza)
-      - Zmanjšano izločanje ščitničnega hormona (hipotiroza)
+      - Prekomerno izločanje ščitničnih hormonov (hipertiroidizem)
+      - Zmanjšano izločanje ščitničnih hormonov (hipotiroidizem)
+      - Vozliče in ciste ščitnice
 
       📞 Naročanje: **04 271 30 15** | scitnica@zc-kranj.si
+      🕐 Ordinacijski čas: pon–pet 08:00–16:00
+
+  napotnica:
+    priority: fast
+    category: CENE_INFO
+    keywords:
+      - brez napotnice
+      - samoplačniško
+      - samoplačniski
+      - samoplačnik
+      - zasebno
+      - brez napotice
+      - zzzs
+      - napotnica
+      - z napotnico
+    response: |
+      **Napotnica ZZZS ali samoplačniško?**
+
+      ✅ **Z napotnico ZZZS** — preiskava je brezplačna za zavarovance (pokrita z obveznim zdravstvenim zavarovanjem).
+      💳 **Samoplačniško (brez napotnice)** — plačate po veljavnem ceniku:
+         🧲 MR: 180–320 € | ☢️ RTG: 35–75 € | 🔊 UZ: 65–120 €
+
+      Za samoplačniške preiskave napotnica ni potrebna — naročite se neposredno.
+      📞 **04 271 30 10** | info@zc-kranj.si
 
   zdravstveni_nasvet_splosno:
     priority: medium
