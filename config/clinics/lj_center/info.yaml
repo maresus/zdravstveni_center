@@ -1,5 +1,23 @@
 version: 1
 facts:
+  # narocanje_scitnica MORA biti na vrhu, pred lokacijo
+  # (prestreže "kje se naročim na ščitnico" preden "kje ste" fuzzy-matcha)
+  narocanje_scitnica:
+    priority: fast
+    category: NAROCANJE_INFO
+    keywords:
+      - naroči na ščitnico
+      - naroci na scitnico
+      - naroči se na ščitnico
+      - kje se naročim na ščitnico
+      - naročanje ščitnica
+      - termin ščitnica
+    response: |
+      Za narocanje v Ambulanto za bolezni ščitnice:
+
+      Tel: 04 271 30 15 ali scitnica@zc-kranj.si
+      Ordinacijski čas: pon do pet 08:00 do 16:00
+
   lokacija:
     priority: fast
     category: LOKACIJA_INFO
@@ -10,6 +28,7 @@ facts:
       - kje vas najdem
       - vaš naslov
       - vas naslov
+      - na katerem naslovu
       - fizični naslov
       - lokacija
       - nahajate
@@ -125,7 +144,6 @@ facts:
       - koliko je rtg
       - koliko je uz
       - kako drago
-      - kako drago je
       - cena pregleda
       - cena mr
       - cena rtg
@@ -209,23 +227,42 @@ facts:
 
       📍 Partizanska 12, Kranj | 📞 04 271 30 10
 
-  narocanje_scitnica:
+  # RTG in UZ MORATA biti pred mr_priprava, da "rtg preiskava"/"uz preiskava" ne
+  # zgodi fuzzy-match na "mr preiskava" keyword v mr_priprava
+  service_rtg:
     priority: fast
-    category: NAROCANJE_INFO
+    category: STORITVE_INFO
     keywords:
-      - naroči na ščitnico
-      - naroci na scitnico
-      - naroči se na ščitnico
-      - kje se naročim na ščitnico
-      - naročanje ščitnica
-      - termin ščitnica
+      - rtg slikanje
+      - rentgensko slikanje
+      - rentgen kosti
+      - rtg preiskava
     response: |
-      Za narocanje v Ambulanto za bolezni ščitnice:
+      RTG slikanje — Zdravstveni center d.o.o.
 
-      Tel: 04 271 30 15 | scitnica@zc-kranj.si
-      Ordinacijski čas: pon do pet 08:00 do 16:00
+      Izvajamo RTG slikanje kosti, skeletnih struktur, prsnega kosa in trebuha.
+      Preiskava je hitra (5 do 10 minut) in neboleča. Posebna priprava ni potrebna.
 
-  # MR priprava MORA biti pred service_mr, sicer "mr preiskava" ubije "priprava na mr preiskavo"
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
+
+  service_uz:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - ultrazvok
+      - ultrazvočna diagnostika
+      - ultrazvočni pregled
+      - uz preiskava
+    response: |
+      Ultrazvočna diagnostika (UZ) — Zdravstveni center d.o.o.
+
+      Izvajamo:
+      UZ trebuha, UZ sečil in medenice, UZ ščitnice, UZ dojk, UZ sklepov in mehkih tkiv, UZ žil (Doppler)
+
+      UZ preiskave so izključno samoplačniške (brez napotnice).
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
+
+  # MR priprava MORA biti pred service_mr
   mr_priprava:
     priority: fast
     category: STORITVE_INFO
@@ -237,7 +274,6 @@ facts:
       - kaj prinesti na mr
       - kaj moram vedeti pred mr
       - pred mr preiskavo
-      - kako poteka mr preiskava
     response: |
       Pred MR preiskavo:
 
@@ -301,33 +337,14 @@ facts:
       MR preiskave — Zdravstveni center d.o.o.
 
       Izvajamo:
-      MR glave in vratu
-      MR hrbtenice (vratna, prsna, ledvena)
-      MR sklepov (rama, koleno, gleženj, kolk, zapestje)
-      MR artrografija
-      MR trebuha, medenice, prostate, dojk
+      MR glave in vratu, MR hrbtenice (vratna, prsna, ledvena),
+      MR sklepov (rama, koleno, gleženj, kolk, zapestje),
+      MR artrografija, MR trebuha, medenice, prostate, dojk,
       MR angiografija (žilje)
 
       Preiskava traja 15 do 45 minut (odvisno od pregledovanega dela).
       Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
-  service_rtg:
-    priority: fast
-    category: STORITVE_INFO
-    keywords:
-      - rtg slikanje
-      - rentgensko slikanje
-      - rentgen kosti
-      - rtg preiskava
-    response: |
-      RTG slikanje — Zdravstveni center d.o.o.
-
-      Izvajamo RTG slikanje kosti, skeletnih struktur, prsnega kosa in trebuha.
-      Preiskava je hitra (5 do 10 minut) in neboleča. Posebna priprava ni potrebna.
-
-      Narocanje: 04 271 30 10 ali info@zc-kranj.si
-
-  # service_scitnica MORA biti pred service_uz
   service_scitnica:
     priority: fast
     category: STORITVE_INFO
@@ -347,35 +364,13 @@ facts:
       Ambulanta za bolezni ščitnice — Zdravstveni center d.o.o.
 
       Zdravimo:
-      Difuzno povečano in vozličasto žlezo (golša)
-      Prekomerno izločanje ščitničnih hormonov (hipertiroidizem)
-      Zmanjšano izločanje ščitničnih hormonov (hipotiroidizem)
+      Difuzno povečano in vozličasto žlezo (golša),
+      Prekomerno izločanje ščitničnih hormonov (hipertiroidizem),
+      Zmanjšano izločanje ščitničnih hormonov (hipotiroidizem),
       Vozliče in ciste ščitnice
 
       Narocanje: 04 271 30 15 ali scitnica@zc-kranj.si
       Ordinacijski čas: pon do pet 08:00 do 16:00
-
-  service_uz:
-    priority: fast
-    category: STORITVE_INFO
-    keywords:
-      - ultrazvok
-      - ultrazvočna diagnostika
-      - ultrazvočni pregled
-      - uz preiskava
-    response: |
-      Ultrazvočna diagnostika (UZ) — Zdravstveni center d.o.o.
-
-      Izvajamo:
-      UZ trebuha
-      UZ sečil in medenice
-      UZ ščitnice
-      UZ dojk
-      UZ sklepov in mehkih tkiv
-      UZ žil (Doppler)
-
-      UZ preiskave so izključno samoplačniške (brez napotnice).
-      Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
   napotnica:
     priority: fast
