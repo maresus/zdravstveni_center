@@ -4,14 +4,18 @@ facts:
     priority: fast
     category: LOKACIJA_INFO
     keywords:
-      - kje
       - kje ste
+      - kje se nahajate
       - kje vas najdemo
-      - naslov
+      - kje vas najdem
+      - vaš naslov
+      - vas naslov
+      - fizični naslov
       - lokacija
       - nahajate
-      - pridem
       - pridem do vas
+      - kam pridem
+      - kje pridem
     response:
       - |
         Najdete nas na naslovu **Partizanska cesta 12, 4000 Kranj**.
@@ -33,6 +37,8 @@ facts:
       - email
       - e-pošta
       - eposta
+      - email naslov
+      - naslov za email
       - kako vas kontaktiram
       - kako pokličem
       - pokličem
@@ -115,10 +121,17 @@ facts:
       - cenik
       - koliko stane
       - kolk stane
+      - koliko je mr
+      - koliko je rtg
+      - koliko je uz
+      - kako drago
+      - kako drago je
       - cena pregleda
       - cena mr
       - cena rtg
       - cena uz
+      - price
+      - how much
     response:
       - |
         Okvirne cene samoplačniških preiskav:
@@ -164,7 +177,9 @@ facts:
     keywords:
       - ekipa
       - zdravniki pri vas
+      - vaši zdravniki
       - kdo dela pri vas
+      - tim zdravnikov
       - tim
     response: |
       Zdravstveni center d.o.o. zaposluje izkušene radiologe, interniste in diplomirane zdravstvenike s specialistično izobrazbo.
@@ -193,6 +208,22 @@ facts:
       - 🩺 Ambulanta za bolezni ščitnice
 
       📍 Partizanska 12, Kranj | 📞 04 271 30 10
+
+  narocanje_scitnica:
+    priority: fast
+    category: NAROCANJE_INFO
+    keywords:
+      - naroči na ščitnico
+      - naroci na scitnico
+      - naroči se na ščitnico
+      - kje se naročim na ščitnico
+      - naročanje ščitnica
+      - termin ščitnica
+    response: |
+      Za narocanje v Ambulanto za bolezni ščitnice:
+
+      Tel: 04 271 30 15 | scitnica@zc-kranj.si
+      Ordinacijski čas: pon do pet 08:00 do 16:00
 
   # MR priprava MORA biti pred service_mr, sicer "mr preiskava" ubije "priprava na mr preiskavo"
   mr_priprava:
@@ -355,6 +386,8 @@ facts:
       - samoplačniski
       - samoplačnik
       - zasebno plačam
+      - plačam sam
+      - plačam zasebno
       - brez napotice
       - zzzs
       - napotnica
