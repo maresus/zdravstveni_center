@@ -1,23 +1,5 @@
 version: 1
 facts:
-  # narocanje_scitnica MORA biti na vrhu, pred lokacijo
-  # (prestreže "kje se naročim na ščitnico" preden "kje ste" fuzzy-matcha)
-  narocanje_scitnica:
-    priority: fast
-    category: NAROCANJE_INFO
-    keywords:
-      - naroči na ščitnico
-      - naroci na scitnico
-      - naroči se na ščitnico
-      - kje se naročim na ščitnico
-      - naročanje ščitnica
-      - termin ščitnica
-    response: |
-      Za narocanje v Ambulanto za bolezni ščitnice:
-
-      Tel: 04 271 30 15 ali scitnica@zc-kranj.si
-      Ordinacijski čas: pon do pet 08:00 do 16:00
-
   lokacija:
     priority: fast
     category: LOKACIJA_INFO
@@ -173,6 +155,24 @@ facts:
         Z napotnico ZZZS: brez doplačila za zavarovance.
         Točen cenik: **04 271 30 10** ali info@zc-kranj.si
 
+  # narocanje_scitnica MORA biti po cene, ker "naroči se na ščitnico" fuzzy-matcha
+  # "cena ščitnice" pri 85% — cene ga mora ujeti prej z exactnim match "cena"
+  narocanje_scitnica:
+    priority: fast
+    category: NAROCANJE_INFO
+    keywords:
+      - naroči na ščitnico
+      - naroci na scitnico
+      - naroči se na ščitnico
+      - kje se naročim na ščitnico
+      - naročanje ščitnica
+      - termin ščitnica
+    response: |
+      Za narocanje v Ambulanto za bolezni ščitnice:
+
+      Tel: 04 271 30 15 ali scitnica@zc-kranj.si
+      Ordinacijski čas: pon do pet 08:00 do 16:00
+
   vodstvo:
     priority: fast
     category: PODJETJE_INFO
@@ -227,42 +227,6 @@ facts:
 
       📍 Partizanska 12, Kranj | 📞 04 271 30 10
 
-  # RTG in UZ MORATA biti pred mr_priprava, da "rtg preiskava"/"uz preiskava" ne
-  # zgodi fuzzy-match na "mr preiskava" keyword v mr_priprava
-  service_rtg:
-    priority: fast
-    category: STORITVE_INFO
-    keywords:
-      - rtg slikanje
-      - rentgensko slikanje
-      - rentgen kosti
-      - rtg preiskava
-    response: |
-      RTG slikanje — Zdravstveni center d.o.o.
-
-      Izvajamo RTG slikanje kosti, skeletnih struktur, prsnega kosa in trebuha.
-      Preiskava je hitra (5 do 10 minut) in neboleča. Posebna priprava ni potrebna.
-
-      Narocanje: 04 271 30 10 ali info@zc-kranj.si
-
-  service_uz:
-    priority: fast
-    category: STORITVE_INFO
-    keywords:
-      - ultrazvok
-      - ultrazvočna diagnostika
-      - ultrazvočni pregled
-      - uz preiskava
-    response: |
-      Ultrazvočna diagnostika (UZ) — Zdravstveni center d.o.o.
-
-      Izvajamo:
-      UZ trebuha, UZ sečil in medenice, UZ ščitnice, UZ dojk, UZ sklepov in mehkih tkiv, UZ žil (Doppler)
-
-      UZ preiskave so izključno samoplačniške (brez napotnice).
-      Narocanje: 04 271 30 10 ali info@zc-kranj.si
-
-  # MR priprava MORA biti pred service_mr
   mr_priprava:
     priority: fast
     category: STORITVE_INFO
@@ -274,6 +238,7 @@ facts:
       - kaj prinesti na mr
       - kaj moram vedeti pred mr
       - pred mr preiskavo
+      - kako poteka mr preiskava
     response: |
       Pred MR preiskavo:
 
@@ -294,7 +259,6 @@ facts:
       - koliko časa traja mr
       - koliko casa traja mr
       - kako dolgo sem v aparatu
-      - mr preiskava trajanje
       - trajanje mr
       - koliko traja mr
       - kako dolgo mr
@@ -345,6 +309,21 @@ facts:
       Preiskava traja 15 do 45 minut (odvisno od pregledovanega dela).
       Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
+  service_rtg:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - rtg slikanje
+      - rentgensko slikanje
+      - rentgen kosti
+    response: |
+      RTG slikanje — Zdravstveni center d.o.o.
+
+      Izvajamo RTG slikanje kosti, skeletnih struktur, prsnega kosa in trebuha.
+      Preiskava je hitra (5 do 10 minut) in neboleča. Posebna priprava ni potrebna.
+
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
+
   service_scitnica:
     priority: fast
     category: STORITVE_INFO
@@ -371,6 +350,22 @@ facts:
 
       Narocanje: 04 271 30 15 ali scitnica@zc-kranj.si
       Ordinacijski čas: pon do pet 08:00 do 16:00
+
+  service_uz:
+    priority: fast
+    category: STORITVE_INFO
+    keywords:
+      - ultrazvok
+      - ultrazvočna diagnostika
+      - ultrazvočni pregled
+    response: |
+      Ultrazvočna diagnostika (UZ) — Zdravstveni center d.o.o.
+
+      Izvajamo:
+      UZ trebuha, UZ sečil in medenice, UZ ščitnice, UZ dojk, UZ sklepov in mehkih tkiv, UZ žil (Doppler)
+
+      UZ preiskave so izključno samoplačniške (brez napotnice).
+      Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
   napotnica:
     priority: fast
