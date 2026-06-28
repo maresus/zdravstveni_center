@@ -1,5 +1,25 @@
 version: 1
 facts:
+  # MORA biti PRED lokacijo:
+  # "kje se naročim na ščitnico" → "kje se naročim" exact substring (safe 14 chars)
+  # "kje ste" → 71% vs "kje se naročim", MISS → spusti do lokacije ✓
+  # BREZ "naroči se na ščitnico" (85% vs "cena ščitnice" → conflict s cene)
+  # BREZ "kje se naročim na ščitnico" (92% vs "kje ste" → conflict z lokacijo)
+  narocanje_scitnica:
+    priority: fast
+    category: NAROCANJE_INFO
+    keywords:
+      - naroči na ščitnico
+      - naroci na scitnico
+      - kje se naročim
+      - naročanje ščitnica
+      - termin ščitnica
+    response: |
+      Za narocanje v Ambulanto za bolezni ščitnice:
+
+      Tel: 04 271 30 15 ali scitnica@zc-kranj.si
+      Ordinacijski čas: pon do pet 08:00 do 16:00
+
   lokacija:
     priority: fast
     category: LOKACIJA_INFO
@@ -155,24 +175,6 @@ facts:
         Z napotnico ZZZS: brez doplačila za zavarovance.
         Točen cenik: **04 271 30 10** ali info@zc-kranj.si
 
-  # narocanje_scitnica MORA biti po cene, ker "naroči se na ščitnico" fuzzy-matcha
-  # "cena ščitnice" pri 85% — cene ga mora ujeti prej z exactnim match "cena"
-  narocanje_scitnica:
-    priority: fast
-    category: NAROCANJE_INFO
-    keywords:
-      - naroči na ščitnico
-      - naroci na scitnico
-      - naroči se na ščitnico
-      - kje se naročim na ščitnico
-      - naročanje ščitnica
-      - termin ščitnica
-    response: |
-      Za narocanje v Ambulanto za bolezni ščitnice:
-
-      Tel: 04 271 30 15 ali scitnica@zc-kranj.si
-      Ordinacijski čas: pon do pet 08:00 do 16:00
-
   vodstvo:
     priority: fast
     category: PODJETJE_INFO
@@ -237,8 +239,8 @@ facts:
       - navodila za mr
       - kaj prinesti na mr
       - kaj moram vedeti pred mr
-      - pred mr preiskavo
-      - kako poteka mr preiskava
+      - pred mr
+      - kako poteka mr
     response: |
       Pred MR preiskavo:
 
@@ -306,6 +308,7 @@ facts:
       MR artrografija, MR trebuha, medenice, prostate, dojk,
       MR angiografija (žilje)
 
+      Izvajamo tudi RTG slikanje in UZ ultrazvočno diagnostiko.
       Preiskava traja 15 do 45 minut (odvisno od pregledovanega dela).
       Narocanje: 04 271 30 10 ali info@zc-kranj.si
 
