@@ -1,6 +1,32 @@
 version: 1
 facts:
   # VARNOSTNI vnosi — MORAJO biti PRVI (pred splošnimi MR/preiskave ključnimi besedami)
+  cene_en:
+    priority: fast
+    category: CENE_INFO
+    keywords:
+      - how much does
+      - how much is
+      - what is the price
+      - what does it cost
+      - mri price
+      - mri cost
+      - mri fee
+      - price of mri
+      - cost of mri
+      - how much for mri
+    response: |
+      Approximate prices for self-pay examinations:
+
+      🧲 **MRI** — from €180 to €320 (depending on body part)
+      ☢️ **X-ray** — from €35 to €75
+      🔊 **Ultrasound** — from €65 to €120
+      💉 **Ultrasound-guided procedures** — from €150 to €280
+      🩺 **Thyroid clinic** — from €80 to €150
+
+      Patients with a ZZZS referral pay nothing.
+      For exact pricing, call 📞 **04 271 30 10** or email info@zc-kranj.si
+
   mr_kontraindikacije_top:
     priority: fast
     category: SAFETY_INFO
@@ -196,8 +222,6 @@ facts:
       - cena mr
       - cena rtg
       - cena uz
-      - price
-      - how much
     response:
       - |
         Okvirne cene samoplačniških preiskav:
