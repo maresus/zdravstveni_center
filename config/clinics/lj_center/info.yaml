@@ -396,6 +396,71 @@ facts:
       Za samoplačniške preiskave napotnica ni potrebna — narocite se neposredno.
       Tel: 04 271 30 10 ali info@zc-kranj.si
 
+  mr_kontraindikacije:
+    priority: fast
+    category: SAFETY_INFO
+    keywords:
+      - spodbujevalnik
+      - srčni spodbujevalnik
+      - pacemaker
+      - defibrilator
+      - kovinski vsadek
+      - kovinsk vsadki
+      - endoproteza
+      - vsajen material
+      - ali je mr varen
+      - ali je mr varno
+      - mr z vsadki
+      - mr spodbujevalnik
+      - mr pacemaker
+    response: |
+      ⚠️ Srčni spodbujevalnik, defibrilator in nekateri kovinski vsadki so možne kontraindikacije za MR.
+
+      Pred naročilom OBVEZNO pokličite: 📞 **04 271 30 10**
+      Naše osebje bo preverilo združljivost vašega vsadka z magnetnim poljem.
+
+      Ne naročajte se prek spleta — varnost najprej.
+
+  nosecnost_mr:
+    priority: fast
+    category: SAFETY_INFO
+    keywords:
+      - sem noseča
+      - noseča mr
+      - nosečnost mr
+      - nosečnica mr
+      - v nosečnosti mr
+      - ali noseča mr
+      - noseča preiskava
+    response: |
+      MR preiskava med nosečnostjo zahteva predhoden posvet z zdravnikom in radiologom.
+
+      Prosimo pokličite: 📞 **04 271 30 10**
+      Skupaj z vašim ginekologom in našim radiologom bomo ocenili koristi in tveganja.
+
+      Pri naročanju vedno navedite, da ste noseči.
+
+  identiteta:
+    priority: fast
+    category: IDENTITY_INFO
+    keywords:
+      - si chatgpt
+      - si gpt
+      - si robot
+      - si ai
+      - si umetna inteligenca
+      - si human
+      - si človek
+      - si pravi
+      - kdo si ti
+      - chatgpt
+      - si bot
+    response: |
+      Sem digitalni asistent Zdravstvenega centra d.o.o. v Kranju — nisem ChatGPT niti drug splošni AI.
+
+      Specializiran sem za informacije o naših storitvah (MR, RTG, UZ, ščitnica), naročanje in kontakt.
+      Kako vam lahko pomagam?
+
   zdravstveni_nasvet_splosno:
     priority: medium
     category: ZDRAVSTVENI_NASVET

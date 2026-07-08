@@ -104,7 +104,8 @@ def handle_fast_pass(
             if "zdravniški nasvet" not in fast_reply and "diagnoza" not in fast_reply:
                 fast_reply = fast_reply.rstrip() + _disclaimer
 
-    if deps.is_in_flow(session_id):
+    _bypass_flow_categories = {"SAFETY_INFO", "IDENTITY_INFO"}
+    if deps.is_in_flow(session_id) and _category not in _bypass_flow_categories:
         fast_reply = deps.build_interrupt_response(
             fast_reply,
             deps.get_current_step(session_id),
