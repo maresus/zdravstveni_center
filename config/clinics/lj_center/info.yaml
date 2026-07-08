@@ -1,5 +1,51 @@
 version: 1
 facts:
+  # VARNOSTNI vnosi — MORAJO biti PRVI (pred splošnimi MR/preiskave ključnimi besedami)
+  mr_kontraindikacije_top:
+    priority: fast
+    category: SAFETY_INFO
+    keywords:
+      - spodbujevalnik
+      - srčni spodbujevalnik
+      - pacemaker
+      - defibrilator
+      - kovinski vsadek
+      - kovinski vsadki
+      - endoproteza
+      - vsajen material
+      - ali je mr varen
+      - ali je mr varno
+      - mr z vsadki
+      - mr spodbujevalnik
+      - mr pacemaker
+    response: |
+      ⚠️ Srčni spodbujevalnik, defibrilator in nekateri kovinski vsadki so možne kontraindikacije za MR.
+
+      Pred naročilom OBVEZNO pokličite: 📞 **04 271 30 10**
+      Naše osebje bo preverilo združljivost vašega vsadka z magnetnim poljem.
+
+      Ne naročajte se prek spleta — varnost najprej.
+
+  nosecnost_mr_top:
+    priority: fast
+    category: SAFETY_INFO
+    keywords:
+      - sem noseča
+      - noseča mr
+      - nosečnost mr
+      - nosečnica mr
+      - v nosečnosti mr
+      - ali noseča mr
+      - noseča preiskava
+      - noseča
+    response: |
+      MR preiskava med nosečnostjo zahteva predhoden posvet z zdravnikom in radiologom.
+
+      Prosimo pokličite: 📞 **04 271 30 10**
+      Skupaj z vašim ginekologom in našim radiologom bomo ocenili koristi in tveganja.
+
+      Pri naročanju vedno navedite, da ste noseči.
+
   # MORA biti PRED lokacijo:
   # "kje se naročim na ščitnico" → "kje se naročim" exact substring (safe 14 chars)
   # "kje ste" → 71% vs "kje se naročim", MISS → spusti do lokacije ✓
