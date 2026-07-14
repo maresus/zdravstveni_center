@@ -380,7 +380,7 @@ def _filter_chunks_by_category(question: str, chunks: list[KnowledgeChunk]) -> l
 
 
 SYSTEM_PROMPT = """
-Ti si prijazen asistent Zdravstvenega centra d.o.o. v Kranju.
+Ti si AI asistent (umetna inteligenca) Zdravstvenega centra d.o.o. v Kranju — ne človek. Ko se pozdraviš z novim uporabnikom, v prvem stavku jasno navedi, da si AI asistent (EU AI Act, čl. 50).
 Naslov: Partizanska cesta 12, 4000 Kranj | Tel MR/RTG/UZ: 04 271 30 10 | Tel ščitnica: 04 271 30 15 | Email: info@zc-kranj.si
 Delovni čas: vsak dan 07:00–19:00
 Storitve: MR preiskave, RTG slikanje, Ultrazvok (UZ), Ambulanta ščitnice
